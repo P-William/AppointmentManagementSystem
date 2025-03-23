@@ -1,62 +1,134 @@
-@import url("root.css");
+    @import url("root.css");
 
-.logo-doctor {
-    -fx-font-size: 56px;
+    .main {
+    -fx-background-color: -neutral-100;
+    -fx-padding: 12px;
+    }
+
+    .logo-doctor {
+        -fx-font-size: 56px;
+        -fx-font-weight: bold;
+        -fx-fill: -primary-500;
+    }
+
+    .logo-tracker {
+        -fx-font-size: 56px;
+        -fx-font-weight: bold;
+        -fx-fill: -secondary-500;
+    }
+
+    .side-menu {
+        -fx-padding: 16px;
+        -fx-background-color: -neutral-50;
+        -fx-spacing: 16px;
+    }
+
+    .toggle-button.side-menu-main-btn {
+        -fx-pref-height: 24px;
+        -fx-pref-width: 224px;
+        -fx-background-color: -neutral-50;
+        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 4, 4);
+        -fx-cursor: hand;
+
+    }
+
+    .toggle-button.side-menu-main-btn:selected {
+        -fx-background-color: linear-gradient(to right, #AEDCFF 0%, #E7ADFD 100%);
+
+    }
+
+    .page {
+        -fx-padding: 16px;
+        -fx-background-color: -neutral-50;
+        -fx-spacing: 16px;
+    }
+
+    .page-title {
+        -fx-font-size: 48px;
+        -fx-font-weight: bold;
+    }
+
+    .stat-card-container {
+    -fx-spacing: 68px;
+    }
+
+    .stat-card {
+        -fx-padding: 12px;
+        -fx-spacing: 12px;
+        -fx-background-color: -neutral-50;
+        -fx-border-color: -neutral-900;
+        -fx-border-width: 1px;
+        -fx-pref-width: 160px;
+        -fx-pref-height: 72px;
+    }
+
+    .stat-card-title {
+    -fx-font-size: 16px;
+    }
+
+    .stat-card-value {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-fill: -primary-500;
+    }
+
+    .patients-seperator .line {
+        -fx-background-color: -primary-500;
+        -fx-pref-height: 1;
+        -fx-border-color: null;
+    }
+
+    .doctors-seperator .line {
+        -fx-background-color: -tertiary-500;
+        -fx-pref-height: 1;
+        -fx-border-color: null;
+    }
+
+    .rooms-seperator .line {
+        -fx-background-color: -secondary-500;
+        -fx-pref-height: 1;
+        -fx-border-color: null;
+    }
+
+    .page-subheading {
+        -fx-font-size: 24px;
+        -fx-font-weight: bold;
+    }
+
+    .table-heading {
+        -fx-padding: 12px 12px 0px 12px;
+        -fx-font-size: 20px;
+        -fx-font-weight: bold;
+    }
+
+    .date-size {
+        -fx-pref-width: 304px;
+    }
+
+    .patient-size {
+        -fx-pref-width: 204px;
+    }
+
+    .doctor-size {
+        -fx-pref-width: 204px;
+    }
+
+    .room-size {
+        -fx-pref-width: 204px;
+    }
+
+    .table-seperator {
+    -fx-padding: 12px;
+    }
+
+    .table-seperator .line {
+        -fx-background-color: -neutral-500;
+        -fx-pref-height: 1;
+        -fx-border-color: null;
+    }
+
+.table-entry {
+    -fx-padding: 12px 12px 0px 12px;
+    -fx-font-size: 16px;
 }
 
-.logo-tracker {
-    -fx-font-size: 56px;
-    -fx-font-weight: bold;
-    -fx-fill: -secondary-500;
-}
 
-.side-menu {
-    -fx-padding: 16px;
-    -fx-background-color: -neutral-50;
-    -fx-spacing: 16px;
-}
-
-.toggle-button.side-menu-main-btn {
-    -fx-pref-height: 24px;
-    -fx-pref-width: 224px;
-    -fx-background-color: -neutral-50;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 4, 4);
-
-}
-
-.toggle-button.side-menu-main-btn:selected {
-    -fx-background-color: linear-gradient(to right, #AEDCFF 0%, #E7ADFD 100%);
-
-}
-
-.label.page-title {
-}
-
-.vbox.stat-card {
-}
-
-.label.stat-card-title {
-}
-
-.separator.patients-seperator {
-}
-
-.label.stat-card-value {
-}
-
-.separator.doctors-seperator {
-}
-
-.separator.rooms-seperator {
-}
-
-.label.page-subheading {
-}
-
-.label.table-heading {
-}
-
-.button.load-more {
-}

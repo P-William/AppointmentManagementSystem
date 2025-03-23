@@ -18,7 +18,7 @@ public class DashboardScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1440, 1024);
+        Scene scene = new Scene(root, 1270, 1024);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/dashboardStyle.css")).toExternalForm());

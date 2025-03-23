@@ -16,7 +16,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.group3.DashboardScreen"
-            stylesheets="@dashboardStyle.css">
+            stylesheets="@dashboardStyle.css" styleClass="main">
 
 <top>
     <TextFlow>
@@ -26,18 +26,22 @@
 
 </top>
     <left>
-        <VBox styleClass="side-menu">
-            <ToggleButton styleClass="side-menu-main-btn">Dashboard</ToggleButton>
-            <ToggleButton styleClass="side-menu-main-btn">Calendar</ToggleButton>
-            <ToggleButton styleClass="side-menu-main-btn">Patients</ToggleButton>
-            <ToggleButton styleClass="side-menu-main-btn">Doctors</ToggleButton>
-            <ToggleButton styleClass="side-menu-main-btn">Rooms</ToggleButton>
-        </VBox>
+        <HBox>
+            <VBox styleClass="side-menu">
+                <ToggleButton styleClass="side-menu-main-btn" selected="true">Dashboard</ToggleButton>
+                <ToggleButton styleClass="side-menu-main-btn">Calendar</ToggleButton>
+                <ToggleButton styleClass="side-menu-main-btn">Patients</ToggleButton>
+                <ToggleButton styleClass="side-menu-main-btn">Doctors</ToggleButton>
+                <ToggleButton styleClass="side-menu-main-btn">Rooms</ToggleButton>
+            </VBox>
+            <Region prefWidth="12"></Region>
+        </HBox>
+
     </left>
     <center>
-        <VBox>
+        <VBox styleClass="page">
             <Label styleClass="page-title">Dashboard</Label>
-            <HBox>
+            <HBox styleClass="stat-card-container">
                 <VBox styleClass="stat-card">
                     <Label styleClass="stat-card-title">Patients</Label>
                     <Separator styleClass="patients-seperator" />
@@ -55,17 +59,24 @@
                 </VBox>
             </HBox>
             <Label styleClass="page-subheading">Today's appointments (March 22, 2025)</Label>
-            <ScrollPane>
-                <VBox>
-                    <HBox>
-                        <Label styleClass="table-heading">Date and Time</Label>
-                        <Label styleClass="table-heading">Patient</Label>
-                        <Label styleClass="table-heading">Doctor</Label>
-                        <Label styleClass="table-heading">Room Number</Label>
+            <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
+                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
+                    <HBox styleClass="table-heading" maxWidth="Infinity">
+                        <Label styleClass="date-size">Date and Time</Label>
+                        <Label styleClass="patient-size">Patient</Label>
+                        <Label styleClass="doctor-size">Doctor</Label>
+                        <Label styleClass="room-size">Room Number</Label>
                     </HBox>
+                    <Separator styleClass="table-seperator"/>
+                    <HBox styleClass="table-entry" maxWidth="Infinity">
+                        <Label styleClass="date-size">Mar 22, 2025 @ 13:00-13:30</Label>
+                        <Label styleClass="patient-size">Brooke Cronin</Label>
+                        <Label styleClass="doctor-size">Timmy Smith</Label>
+                        <Label styleClass="room-size">1</Label>
+                    </HBox>
+                    <Separator styleClass="table-seperator"/>
                 </VBox>
             </ScrollPane>
-            <Button styleClass="load-more">Load More</Button>
         </VBox>
 
     </center>
