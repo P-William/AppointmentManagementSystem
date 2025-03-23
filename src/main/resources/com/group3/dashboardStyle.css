@@ -1,0 +1,62 @@
+@import url("root.css");
+
+.logo-doctor {
+    -fx-font-size: 56px;
+    -fx-font-weight: bold;
+    -fx-fill: -primary-500;
+}
+
+.logo-tracker {
+    -fx-font-size: 56px;
+    -fx-font-weight: bold;
+    -fx-fill: -secondary-500;
+}
+
+.side-menu {
+    -fx-padding: 16px;
+    -fx-background-color: -neutral-50;
+    -fx-spacing: 16px;
+}
+
+.toggle-button.side-menu-main-btn {
+    -fx-pref-height: 24px;
+    -fx-pref-width: 224px;
+    -fx-background-color: -neutral-50;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 4, 4);
+
+}
+
+.toggle-button.side-menu-main-btn:selected {
+    -fx-background-color: linear-gradient(to right, #AEDCFF 0%, #E7ADFD 100%);
+
+}
+
+.label.page-title {
+}
+
+.vbox.stat-card {
+}
+
+.label.stat-card-title {
+}
+
+.separator.patients-seperator {
+}
+
+.label.stat-card-value {
+}
+
+.separator.doctors-seperator {
+}
+
+.separator.rooms-seperator {
+}
+
+.label.page-subheading {
+}
+
+.label.table-heading {
+}
+
+.button.load-more {
+}
