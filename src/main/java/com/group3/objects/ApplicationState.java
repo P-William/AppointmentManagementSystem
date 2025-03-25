@@ -26,6 +26,54 @@ public class ApplicationState {
     private final List<Patient> patients = new ArrayList<>();
     private final List<Appointment> appointments = new ArrayList<>();
 
+    public void addRoom(Room room) {
+        rooms.add(room);
+    }
+
+    public void addDoctor(Doctor doctor) {
+        doctors.add(doctor);
+    }
+
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+    }
+
+    public void addAppointment(Appointment appointment) {
+        doctors.stream()
+            .filter(doctor -> doctor.getDoctorId().equals(appointment.getDoctor().getDoctorId()))
+            .findFirst()
+            .ifPresent(doctor -> doctor.getAppointments().add(appointment));
+        patients.stream()
+            .filter(patient -> patient.getPatientId().equals(appointment.getPatient().getPatientId()))
+            .findFirst()
+            .ifPresent(patient -> patient.getAppointments().add(appointment));
+        appointments.add(appointment);
+    }
+
+    public void removeRoom(Room room) {
+        rooms.remove(room);
+    }
+
+    public void removeDoctor(Doctor doctor) {
+        doctors.remove(doctor);
+    }
+
+    public void removePatient(Patient patient) {
+        patients.remove(patient);
+    }
+
+    public void removeAppointment(Appointment appointment) {
+        doctors.stream()
+            .filter(doctor -> doctor.getDoctorId().equals(appointment.getDoctor().getDoctorId()))
+            .findFirst()
+            .ifPresent(doctor -> doctor.getAppointments().remove(appointment));
+        patients.stream()
+            .filter(patient -> patient.getPatientId().equals(appointment.getPatient().getPatientId()))
+            .findFirst()
+            .ifPresent(patient -> patient.getAppointments().remove(appointment));
+        appointments.remove(appointment);
+    }
+
     public void saveState() throws JsonFileSaveException {
         try {
             saveRooms();

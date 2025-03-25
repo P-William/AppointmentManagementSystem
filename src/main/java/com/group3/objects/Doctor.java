@@ -1,5 +1,6 @@
 package com.group3.objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -23,8 +24,11 @@ public class Doctor {
     private String email;
     private String phoneNumber;
 
+    @Builder.Default
     private List<String> specialties = new ArrayList<>();
 
+    @JsonIgnore
+    @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
 
     public static Doctor create(

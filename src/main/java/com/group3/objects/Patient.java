@@ -26,11 +26,15 @@ public class Patient {
     private String phoneNumber;
     private String address;
 
+    @Builder.Default
     private List<String> allergies = new ArrayList<>();
+    @Builder.Default
     private List<String> medicalConditions = new ArrayList<>();
+    @Builder.Default
     private List<String> medications = new ArrayList<>();
 
     @JsonIgnore
+    @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
 
     public static Patient create(
