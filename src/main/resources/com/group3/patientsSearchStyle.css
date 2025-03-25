@@ -98,46 +98,16 @@
         -fx-font-weight: bold;
     }
 
-    .stat-card-container {
-    -fx-spacing: 68px;
-    }
+.search-icon {
+        -fx-stroke: -neutral-900;
+        -fx-stroke-width: 1;
+    -fx-fill: -neutral-900;
+}
 
-    .stat-card {
-        -fx-padding: 12px;
-        -fx-spacing: 12px;
-        -fx-background-color: -neutral-50;
-        -fx-border-color: -neutral-900;
-        -fx-border-width: 1px;
-        -fx-pref-width: 160px;
-        -fx-pref-height: 72px;
-    }
-
-    .stat-card-title {
-    -fx-font-size: 16px;
-    }
-
-    .stat-card-value {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    }
-
-    .patients-seperator .line {
-        -fx-background-color: -primary-500;
-        -fx-pref-height: 1;
-        -fx-border-color: null;
-    }
-
-    .doctors-seperator .line {
-        -fx-background-color: -tertiary-500;
-        -fx-pref-height: 1;
-        -fx-border-color: null;
-    }
-
-    .rooms-seperator .line {
-        -fx-background-color: -secondary-500;
-        -fx-pref-height: 1;
-        -fx-border-color: null;
-    }
+.search-bar {
+-fx-padding: 4px 0 4px 28px;
+-fx-font-size: 16px;
+}
 
     .page-subheading {
         -fx-font-size: 24px;
@@ -150,20 +120,20 @@
         -fx-font-weight: bold;
     }
 
-    .date-size {
-        -fx-pref-width: 304px;
+    .name-size {
+        -fx-pref-width: 184px;
     }
 
-    .patient-size {
-        -fx-pref-width: 204px;
+    .email-size {
+        -fx-pref-width: 224px;
     }
 
-    .doctor-size {
-        -fx-pref-width: 204px;
+    .phone-size {
+        -fx-pref-width: 154px;
     }
 
-    .room-size {
-        -fx-pref-width: 204px;
+    .address-size {
+        -fx-pref-width: 354px;
     }
 
     .table-seperator {
