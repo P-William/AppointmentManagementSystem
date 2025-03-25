@@ -13,7 +13,8 @@ target/
 ### VS Code ###
 .vscode/
 
-
+### Application Data ###
+/data/*
 
 
 

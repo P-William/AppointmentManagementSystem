@@ -1,19 +1,18 @@
 package com.group3.objects;
 
-import com.group3.IdService;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder(access = AccessLevel.PRIVATE)
 public class Appointment {
-    private Long appointmentId;
+    private UUID appointmentId;
     private LocalDateTime createdAt;
 
     private Patient patient;
@@ -25,9 +24,16 @@ public class Appointment {
     private String reasonForVisit;
     private Status status;
 
-    public static Appointment create(Patient patient, Doctor doctor, Room room, LocalDateTime appointmentTime, Duration duration, String reasonForVisit) {
+    public static Appointment create(
+        Patient patient,
+        Doctor doctor,
+        Room room,
+        LocalDateTime appointmentTime,
+        Duration duration,
+        String reasonForVisit
+    ) {
         return Appointment.builder()
-            .appointmentId(IdService.getNewId())
+            .appointmentId(UUID.randomUUID())
             .createdAt(LocalDateTime.now())
             .patient(patient)
             .doctor(doctor)
