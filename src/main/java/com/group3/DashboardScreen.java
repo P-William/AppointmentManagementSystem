@@ -50,6 +50,24 @@ public class DashboardScreen extends Application {
         launch(args);
     }
 
+    public void selectDashboard(ActionEvent actionEvent) throws IOException {
+
+        // Load FXML layout
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/dashboardLayout.fxml"));
+        BorderPane root = loader.load();
+
+        // Set up the scene
+        Scene scene = new Scene(root, 1270, 1024);
+        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
+        // Add CSS
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/dashboardStyle.css")).toExternalForm());
+//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
+        // Configure the stage
+        stage.setTitle("Doctor Tracker");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void selectPatients(ActionEvent actionEvent) throws IOException {
 
         // Load FXML layout
@@ -61,6 +79,24 @@ public class DashboardScreen extends Application {
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsSearchStyle.css")).toExternalForm());
+//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
+        // Configure the stage
+        stage.setTitle("Doctor Tracker");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void selectDoctors(ActionEvent actionEvent) throws IOException {
+
+        // Load FXML layout
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/doctorsSearchLayout.fxml"));
+        BorderPane root = loader.load();
+
+        // Set up the scene
+        Scene scene = new Scene(root, 1270, 1024);
+        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
+        // Add CSS
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/doctorsSearchStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage
         stage.setTitle("Doctor Tracker");

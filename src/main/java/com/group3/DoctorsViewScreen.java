@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 
-public class PatientsViewScreen extends Application {
+public class DoctorsViewScreen extends Application {
     @FXML
     public Label email;
     @FXML
@@ -26,13 +26,7 @@ public class PatientsViewScreen extends Application {
     @FXML
     public Label address;
     @FXML
-    public Label allergies;
-    @FXML
-    public Label medicalConditions;
-    @FXML
-    public Label medication;
-    @FXML
-    public Label language;
+    public Label specialities;
     @FXML
     public Label pageTitle;
     @FXML
@@ -46,21 +40,21 @@ public class PatientsViewScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Patients > Brooke Cronin");
+        pageTitle.setText("Doctors > Timmy Smith");
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientsViewLayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/doctorsViewLayout.fxml"));
         BorderPane root = loader.load();
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
 
         // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsViewStyle.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/doctorsViewStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage
         primaryStage.setTitle("Doctor Tracker");
@@ -153,43 +147,15 @@ public class PatientsViewScreen extends Application {
         }
     }
 
-    public void changeAddress(ActionEvent actionEvent) {
-        String newAddress = showInputDialog("Enter new address:", address.getText());
-        if (newAddress != null) {
-            address.setText(newAddress);
+
+    public void changeSpeciality(ActionEvent actionEvent) {
+        List<String> currentSpeciality = Arrays.asList(specialities.getText().split(",\\s*"));
+        List<String> updatedSpeciality = showListChangeDialog("Edit specialities:", currentSpeciality);
+        if (updatedSpeciality != null) {
+            specialities.setText(String.join(", ", updatedSpeciality));
         }
     }
 
-    public void changeAllergies(ActionEvent actionEvent) {
-        List<String> currentAllergies = Arrays.asList(allergies.getText().split(",\\s*"));
-        List<String> updatedAllergies = showListChangeDialog("Edit allergies:", currentAllergies);
-        if (updatedAllergies != null) {
-            allergies.setText(String.join(", ", updatedAllergies));
-        }
-    }
-
-    public void changeMedicalConditions(ActionEvent actionEvent) {
-        List<String> currentConditions = Arrays.asList(medicalConditions.getText().split(",\\s*"));
-        List<String> updatedConditions = showListChangeDialog("Edit medical conditions:", currentConditions);
-        if (updatedConditions != null) {
-            medicalConditions.setText(String.join(", ", updatedConditions));
-        }
-    }
-
-    public void changeMedication(ActionEvent actionEvent) {
-        List<String> currentMedication = Arrays.asList(medication.getText().split(",\\s*"));
-        List<String> updatedMedication = showListChangeDialog("Edit medications:", currentMedication);
-        if (updatedMedication != null) {
-            medication.setText(String.join(", ", updatedMedication));
-        }
-    }
-
-    public void changeLanguage(ActionEvent actionEvent) {
-        String newLanguage = showInputDialog("Enter primary language:", language.getText());
-        if (newLanguage != null) {
-            language.setText(newLanguage);
-        }
-    }
 
     private String showInputDialog(String message, String defaultValue) {
         TextInputDialog dialog = new TextInputDialog(defaultValue);
