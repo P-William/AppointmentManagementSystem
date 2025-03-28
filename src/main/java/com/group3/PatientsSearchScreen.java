@@ -9,13 +9,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class PatientScreen extends Application {
+public class PatientsSearchScreen extends Application {
     @FXML
     public TextField searchField;
     @FXML private ToggleButton calendarToggle;
@@ -71,5 +70,22 @@ public class PatientScreen extends Application {
 
     public void searchEntered(ActionEvent actionEvent) {
         System.out.println("Search term: "+searchField.getText());
+    }
+
+    public void viewPatient(ActionEvent actionEvent) throws IOException {
+        // Load FXML layout
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientsViewLayout.fxml"));
+        BorderPane root = loader.load();
+
+        // Set up the scene
+        Scene scene = new Scene(root, 1270, 1024);
+        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
+        // Add CSS
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsViewStyle.css")).toExternalForm());
+//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
+        // Configure the stage
+        stage.setTitle("Doctor Tracker");
+        stage.setScene(scene);
+        stage.show();
     }
 }
