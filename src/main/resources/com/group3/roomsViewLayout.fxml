@@ -16,9 +16,11 @@
 <?import javafx.scene.shape.SVGPath?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Hyperlink?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.DoctorsSearchScreen"
-            stylesheets="@doctorsSearchStyle.css" styleClass="main">
+            fx:controller="com.group3.RoomsViewScreen"
+            stylesheets="@roomsViewStyle.css" styleClass="main">
     <top>
         <TextFlow>
             <Text text="Doctor " styleClass="logo-doctor"/>
@@ -49,12 +51,12 @@
                         <SVGPath styleClass="btn-patients-icon" content="M12 12C10.9 12 9.95833 11.6083 9.175 10.825C8.39167 10.0417 8 9.1 8 8C8 6.9 8.39167 5.95833 9.175 5.175C9.95833 4.39167 10.9 4 12 4C13.1 4 14.0417 4.39167 14.825 5.175C15.6083 5.95833 16 6.9 16 8C16 9.1 15.6083 10.0417 14.825 10.825C14.0417 11.6083 13.1 12 12 12ZM4 18V17.2C4 16.6333 4.146 16.1127 4.438 15.638C4.73 15.1633 5.11733 14.8007 5.6 14.55C6.63333 14.0333 7.68333 13.646 8.75 13.388C9.81667 13.13 10.9 13.0007 12 13C13.1 12.9993 14.1833 13.1287 15.25 13.388C16.3167 13.6473 17.3667 14.0347 18.4 14.55C18.8833 14.8 19.271 15.1627 19.563 15.638C19.855 16.1133 20.0007 16.634 20 17.2V18C20 18.55 19.8043 19.021 19.413 19.413C19.0217 19.805 18.5507 20.0007 18 20H6C5.45 20 4.97933 19.8043 4.588 19.413C4.19667 19.0217 4.00067 18.5507 4 18ZM6 18H18V17.2C18 17.0167 17.9543 16.85 17.863 16.7C17.7717 16.55 17.6507 16.4333 17.5 16.35C16.6 15.9 15.6917 15.5627 14.775 15.338C13.8583 15.1133 12.9333 15.0007 12 15C11.0667 14.9993 10.1417 15.112 9.225 15.338C8.30833 15.564 7.4 15.9013 6.5 16.35C6.35 16.4333 6.229 16.55 6.137 16.7C6.045 16.85 5.99933 17.0167 6 17.2V18ZM12 10C12.55 10 13.021 9.80433 13.413 9.413C13.805 9.02167 14.0007 8.55067 14 8C13.9993 7.44933 13.8037 6.97867 13.413 6.588C13.0223 6.19733 12.5513 6.00133 12 6C11.4487 5.99867 10.978 6.19467 10.588 6.588C10.198 6.98133 10.002 7.452 10 8C9.998 8.548 10.194 9.019 10.588 9.413C10.982 9.807 11.4527 10.0027 12 10Z"/>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton onAction="#selectDoctors" styleClass="side-menu-main-btn" selected="true">Doctors
+                <ToggleButton onAction="#selectDoctors" styleClass="side-menu-main-btn">Doctors
                     <graphic>
                         <SVGPath styleClass="btn-doctors-icon" content="M8.8 11.2C7.73913 11.2 6.72172 10.7786 5.97157 10.0284C5.22143 9.27829 4.8 8.26087 4.8 7.20001V4.00001C4.8 3.78783 4.88429 3.58435 5.03432 3.43432C5.18434 3.28429 5.38783 3.20001 5.6 3.20001H6.4C6.61217 3.20001 6.81566 3.11572 6.96569 2.96569C7.11572 2.81566 7.2 2.61218 7.2 2.40001C7.2 2.18783 7.11572 1.98435 6.96569 1.83432C6.81566 1.68429 6.61217 1.60001 6.4 1.60001H5.6C4.96348 1.60001 4.35303 1.85286 3.90294 2.30295C3.45286 2.75304 3.2 3.36349 3.2 4.00001V7.20001C3.20103 8.1038 3.42142 8.99383 3.84224 9.79367C4.26306 10.5935 4.87174 11.2793 5.616 11.792C6.33178 12.4218 6.91217 13.1905 7.32198 14.0513C7.73178 14.9122 7.96245 15.8473 8 16.8C8 18.2852 8.59 19.7096 9.6402 20.7598C10.6904 21.81 12.1148 22.4 13.6 22.4C15.0852 22.4 16.5096 21.81 17.5598 20.7598C18.61 19.7096 19.2 18.2852 19.2 16.8V15.888C19.9541 15.6933 20.6114 15.2302 21.0485 14.5856C21.4856 13.941 21.6726 13.1591 21.5745 12.3864C21.4764 11.6138 21.0998 10.9034 20.5154 10.3885C19.931 9.87368 19.1789 9.58962 18.4 9.58962C17.6211 9.58962 16.869 9.87368 16.2846 10.3885C15.7002 10.9034 15.3236 11.6138 15.2255 12.3864C15.1274 13.1591 15.3144 13.941 15.7515 14.5856C16.1886 15.2302 16.8459 15.6933 17.6 15.888V16.8C17.6 17.8609 17.1786 18.8783 16.4284 19.6284C15.6783 20.3786 14.6609 20.8 13.6 20.8C12.5391 20.8 11.5217 20.3786 10.7716 19.6284C10.0214 18.8783 9.6 17.8609 9.6 16.8C9.63957 15.8461 9.87274 14.9103 10.2853 14.0494C10.6979 13.1884 11.2813 12.4204 12 11.792C12.7413 11.2775 13.3469 10.591 13.7648 9.79122C14.1828 8.99149 14.4008 8.10238 14.4 7.20001V4.00001C14.4 3.36349 14.1471 2.75304 13.6971 2.30295C13.247 1.85286 12.6365 1.60001 12 1.60001H11.2C10.9878 1.60001 10.7843 1.68429 10.6343 1.83432C10.4843 1.98435 10.4 2.18783 10.4 2.40001C10.4 2.61218 10.4843 2.81566 10.6343 2.96569C10.7843 3.11572 10.9878 3.20001 11.2 3.20001H12C12.2122 3.20001 12.4157 3.28429 12.5657 3.43432C12.7157 3.58435 12.8 3.78783 12.8 4.00001V7.20001C12.8 7.72529 12.6965 8.24544 12.4955 8.73074C12.2945 9.21604 11.9999 9.657 11.6284 10.0284C11.257 10.3999 10.816 10.6945 10.3307 10.8955C9.84543 11.0965 9.32529 11.2 8.8 11.2ZM18.4 14.4C17.9757 14.4 17.5687 14.2314 17.2686 13.9314C16.9686 13.6313 16.8 13.2244 16.8 12.8C16.8 12.3757 16.9686 11.9687 17.2686 11.6686C17.5687 11.3686 17.9757 11.2 18.4 11.2C18.8243 11.2 19.2313 11.3686 19.5314 11.6686C19.8314 11.9687 20 12.3757 20 12.8C20 13.2244 19.8314 13.6313 19.5314 13.9314C19.2313 14.2314 18.8243 14.4 18.4 14.4Z"/>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton onAction="#selectRooms" styleClass="side-menu-main-btn">Rooms
+                <ToggleButton onAction="#selectRooms" styleClass="side-menu-main-btn" selected="true">Rooms
                     <graphic>
                         <SVGPath styleClass="btn-rooms-icon" content="M20.625 19.875V4.12501H16.5V0.609619L4.125 2.74323V19.875H0.75V21.375H4.82344L16.5 22.9855V5.62501H19.125V21.375H23.25V19.875H20.625ZM15 21.2645L5.625 19.9714V4.00679L15 2.39063V21.2645ZM12 10.875H13.5V13.875H12V10.875Z"/>
                     </graphic>
@@ -66,32 +68,21 @@
     </left>
     <center>
         <VBox styleClass="page">
-            <Label styleClass="page-title">Doctors</Label>
-            <StackPane alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" onAction="#searchEntered" promptText="Search..." styleClass="search-bar"/>
-                <SVGPath styleClass="search-icon"
-                         content="M10 18C11.775 17.9996 13.4988 17.4054 14.897 16.312L19.293 20.708L20.707 19.294L16.311 14.898C17.405 13.4997 17.9996 11.7754 18 10C18 5.589 14.411 2 10 2C5.589 2 2 5.589 2 10C2 14.411 5.589 18 10 18ZM10 4C13.309 4 16 6.691 16 10C16 13.309 13.309 16 10 16C6.691 16 4 13.309 4 10C4 6.691 6.691 4 10 4Z"
-                         translateX="4"/>
-            </StackPane>
-            <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                    <HBox styleClass="table-heading" maxWidth="Infinity">
-                        <Label styleClass="name-size">Full Name</Label>
-                        <Label styleClass="phone-size">Phone</Label>
-                        <Label styleClass="specialties-size">Specialties</Label>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-                    <HBox styleClass="table-entry" maxWidth="Infinity">
-                        <Label styleClass="name-size">Timmy Smith</Label>
-                        <Label styleClass="phone-size">(123)123-1234</Label>
-                        <Label styleClass="specialties-size">speciality1, speciality2, speciality3</Label>
-                        <Button onAction="#viewDoctor">View</Button>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-
-                </VBox>
-            </ScrollPane>
+            <Label fx:id="pageTitle" styleClass="page-title">Rooms</Label>
+            <HBox styleClass="settings">
+                <Label styleClass="label">Name</Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="name" styleClass="user-text">X-Ray</Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Hyperlink onAction="#changeName" styleClass="link" text="Change" />
+            </HBox>
+            <HBox styleClass="settings">
+                <Label styleClass="label">Number</Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="number" styleClass="user-text">1</Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Hyperlink onAction="#changeNumber" styleClass="link" text="Change" />
+            </HBox>
         </VBox>
-
     </center>
 </BorderPane>

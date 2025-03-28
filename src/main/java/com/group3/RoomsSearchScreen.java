@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PatientsSearchScreen extends Application {
+public class RoomsSearchScreen extends Application {
     @FXML
     public TextField searchField;
     @FXML private ToggleButton calendarToggle;
@@ -32,14 +32,14 @@ public class PatientsSearchScreen extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientSearchLayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/roomsSearchLayout.fxml"));
         BorderPane root = loader.load();
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
 
         // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientSearchStyle.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/roomsSearchStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage
         primaryStage.setTitle("Doctor Tracker");
@@ -104,37 +104,20 @@ public class PatientsSearchScreen extends Application {
         stage.show();
     }
 
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/roomsSearchLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/roomsSearchStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void searchEntered(ActionEvent actionEvent) {
         System.out.println("Search term: "+searchField.getText());
     }
 
-    public void viewPatient(ActionEvent actionEvent) throws IOException {
+    public void viewRoom(ActionEvent actionEvent) throws IOException {
         // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientsViewLayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/roomsViewLayout.fxml"));
         BorderPane root = loader.load();
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsViewStyle.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/roomsViewStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage
         stage.setTitle("Doctor Tracker");
