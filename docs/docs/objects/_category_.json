@@ -1,6 +1,6 @@
 {
   "label": "Objects",
-  "position": 10,
+  "position": 2,
   "link": {
     "type": "generated-index",
     "description": "Covers all the main data types within our application."
