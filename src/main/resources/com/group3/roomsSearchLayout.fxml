@@ -40,9 +40,9 @@
                     </graphic>
                 </ToggleButton>
                 <VBox fx:id="calendarDropdown" visible="false" managed="false" styleClass="dropdown-container">
-                    <ToggleButton styleClass="dropdown-item">Patients</ToggleButton>
-                    <ToggleButton styleClass="dropdown-item">Doctors</ToggleButton>
-                    <ToggleButton styleClass="dropdown-item">Rooms</ToggleButton>
+                    <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Patients</ToggleButton>
+                    <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Doctors</ToggleButton>
+                    <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Rooms</ToggleButton>
                 </VBox>
                 <ToggleButton onAction="#selectPatients" styleClass="side-menu-main-btn">Patients
                     <graphic>
