@@ -15,9 +15,11 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.shape.SVGPath?>
 
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.DashboardScreen"
-            stylesheets="@dashboardStyle.css" styleClass="main">
+            fx:controller="com.group3.CalendarScreen"
+            stylesheets="@calendarStyle.css" styleClass="main">
 
 <top>
     <TextFlow>
@@ -29,19 +31,18 @@
     <left>
         <HBox>
             <VBox styleClass="side-menu">
-                <ToggleButton onAction="#selectDashboard" styleClass="side-menu-main-btn" selected="true">Dashboard
+                <ToggleButton onAction="#selectDashboard" styleClass="side-menu-main-btn">Dashboard
                     <graphic>
                         <SVGPath styleClass="btn-dashboard-icon" content="M8.4 3H5.6C5.17565 3 4.76869 3.16857 4.46863 3.46863C4.16857 3.76869 4 4.17565 4 4.6V9.4C4 9.61011 4.04139 9.81817 4.12179 10.0123C4.2022 10.2064 4.32006 10.3828 4.46863 10.5314C4.6172 10.6799 4.79359 10.7978 4.98771 10.8782C5.18183 10.9586 5.38988 11 5.6 11H8.4C8.61011 11 8.81817 10.9586 9.01229 10.8782C9.20641 10.7978 9.3828 10.6799 9.53137 10.5314C9.67994 10.3828 9.7978 10.2064 9.87821 10.0123C9.95861 9.81817 10 9.61011 10 9.4V4.6C10 4.17565 9.83143 3.76869 9.53137 3.46863C9.23131 3.16857 8.82435 3 8.4 3ZM8.4 15H5.6C5.17565 15 4.76869 15.1686 4.46863 15.4686C4.16857 15.7687 4 16.1757 4 16.6V19.4C4 19.8243 4.16857 20.2313 4.46863 20.5314C4.76869 20.8314 5.17565 21 5.6 21H8.4C8.82435 21 9.23131 20.8314 9.53137 20.5314C9.83143 20.2313 10 19.8243 10 19.4V16.6C10 16.1757 9.83143 15.7687 9.53137 15.4686C9.23131 15.1686 8.82435 15 8.4 15ZM18.4 3H15.6C15.1757 3 14.7687 3.16857 14.4686 3.46863C14.1686 3.76869 14 4.17565 14 4.6V7.4C14 7.82435 14.1686 8.23131 14.4686 8.53137C14.7687 8.83143 15.1757 9 15.6 9H18.4C18.8243 9 19.2313 8.83143 19.5314 8.53137C19.8314 8.23131 20 7.82435 20 7.4V4.6C20 4.17565 19.8314 3.76869 19.5314 3.46863C19.2313 3.16857 18.8243 3 18.4 3ZM18.4 13H15.6C15.1757 13 14.7687 13.1686 14.4686 13.4686C14.1686 13.7687 14 14.1757 14 14.6V19.4C14 19.8243 14.1686 20.2313 14.4686 20.5314C14.7687 20.8314 15.1757 21 15.6 21H18.4C18.8243 21 19.2313 20.8314 19.5314 20.5314C19.8314 20.2313 20 19.8243 20 19.4V14.6C20 14.1757 19.8314 13.7687 19.5314 13.4686C19.2313 13.1686 18.8243 13 18.4 13Z"/>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton fx:id="calendarToggle" styleClass="side-menu-main-btn">Calendar
-
+                <ToggleButton fx:id="calendarToggle" styleClass="side-menu-main-btn" selected="true">Calendar
                     <graphic>
                         <SVGPath styleClass="btn-calendar-icon" content="M19 19H5V8H19M16 1V3H8V1H6V3H5C3.89 3 3 3.89 3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V5C21 4.46957 20.7893 3.96086 20.4142 3.58579C20.0391 3.21071 19.5304 3 19 3H18V1M17 12H12V17H17V12Z"/>
                     </graphic>
                 </ToggleButton>
-                <VBox fx:id="calendarDropdown" visible="false" managed="false" styleClass="dropdown-container">
-                    <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Patients</ToggleButton>
+                <VBox fx:id="calendarDropdown" styleClass="dropdown-container">
+                    <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item" selected="true">Patients</ToggleButton>
                     <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Doctors</ToggleButton>
                     <ToggleButton onAction="#selectCalendar" styleClass="dropdown-item">Rooms</ToggleButton>
                 </VBox>
@@ -67,43 +68,26 @@
     </left>
     <center>
         <VBox styleClass="page">
-            <Label styleClass="page-title">Dashboard</Label>
-            <HBox styleClass="stat-card-container">
-                <VBox styleClass="stat-card">
-                    <Label styleClass="stat-card-title">Patients</Label>
-                    <Separator styleClass="patients-seperator" />
-                    <Label styleClass="stat-card-value">123</Label>
-                </VBox>
-                <VBox styleClass="stat-card">
-                    <Label styleClass="stat-card-title">Doctors</Label>
-                    <Separator styleClass="doctors-seperator" />
-                    <Label styleClass="stat-card-value">12</Label>
-                </VBox>
-                <VBox styleClass="stat-card">
-                    <Label styleClass="stat-card-title">Rooms</Label>
-                    <Separator styleClass="rooms-seperator" />
-                    <Label styleClass="stat-card-value">5</Label>
-                </VBox>
+            <Label styleClass="page-title">Calendar > Patients</Label>
+            <StackPane alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" onAction="#searchEntered" promptText="Search..." styleClass="search-bar"/>
+                <SVGPath styleClass="search-icon"
+                         content="M10 18C11.775 17.9996 13.4988 17.4054 14.897 16.312L19.293 20.708L20.707 19.294L16.311 14.898C17.405 13.4997 17.9996 11.7754 18 10C18 5.589 14.411 2 10 2C5.589 2 2 5.589 2 10C2 14.411 5.589 18 10 18ZM10 4C13.309 4 16 6.691 16 10C16 13.309 13.309 16 10 16C6.691 16 4 13.309 4 10C4 6.691 6.691 4 10 4Z"
+                         translateX="4"/>
+            </StackPane>
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Today" onAction="#goToToday"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="&lt;&lt;" onAction="#goToPreviousYear"/>
+                <Button text="&lt;" onAction="#goToPreviousMonth"/>
+                <Label fx:id="monthYearLabel" styleClass="page-subheading"/>
+                <Button text="&gt;" onAction="#goToNextMonth"/>
+                <Button text="&gt;&gt;" onAction="#goToNextYear"/>
+                <Region HBox.hgrow="ALWAYS"/>
             </HBox>
-            <Label styleClass="page-subheading">Today's appointments (March 22, 2025)</Label>
-            <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                    <HBox styleClass="table-heading" maxWidth="Infinity">
-                        <Label styleClass="date-size">Date and Time</Label>
-                        <Label styleClass="patient-size">Patient</Label>
-                        <Label styleClass="doctor-size">Doctor</Label>
-                        <Label styleClass="room-size">Room Number</Label>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-                    <HBox onMouseClicked="#viewAppointment" styleClass="table-entry" maxWidth="Infinity">
-                        <Label styleClass="date-size">Mar 22, 2025 @ 13:00-13:30</Label>
-                        <Label styleClass="patient-size">Brooke Cronin</Label>
-                        <Label styleClass="doctor-size">Timmy Smith</Label>
-                        <Label styleClass="room-size">1</Label>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-                </VBox>
-            </ScrollPane>
+
+
+            <GridPane fx:id="calendarGrid" />
         </VBox>
 
     </center>

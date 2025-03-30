@@ -85,6 +85,8 @@
     -fx-fill: -neutral-900;
 }
 
+
+
     .page {
         -fx-padding: 16px;
         -fx-background-color: -neutral-50;
@@ -92,79 +94,64 @@
     }
 
     .page-title {
-        -fx-font-size: 48px !important;
+        -fx-font-size: 48px;
         -fx-font-weight: bold;
     }
-
-.settings {
-    -fx-padding: 24px 0px 0px 0px;
-    -fx-spacing: 24px;
+.calendar-day-header {
+    -fx-font-weight: bold;
     -fx-alignment: center;
-    -fx-border-color: -neutral-900;
-    -fx-border-width: 1px 0px 0px 0px;
-    -fx-border-style: solid;
+    -fx-padding: 6px 0;
+}
+
+.calendar-day {
+    -fx-border-color: -neutral-300;
+    -fx-min-height: 126px;
+    -fx-min-width: 126px;
+    -fx-background-color: -neutral-50;
+    -fx-padding: 8px;
+}
+
+.calendar-day-number {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.calendar-day-outside {
+    -fx-fill: #bbb;
+}
+
+.calendar-appointment {
+    -fx-font-size: 10px;
+    -fx-text-fill: -primary-900;
+    -fx-background-color: -primary-400;
+    -fx-padding: 4px 6px;
+    -fx-wrap-text: true;
+    -fx-alignment: TOP_LEFT;
+    -fx-content-display: TOP;
+    -fx-background-radius: 6px;
+    -fx-border-color: -primary-600;
+    -fx-border-width: 1;
+    -fx-border-radius: 6px;
     -fx-pref-width: 100%;
 }
 
-.heading {
-    -fx-text-fill: -neutral-900;
-    -fx-font-family: "Roboto";
-    -fx-font-size: 48px !important;
-    -fx-font-weight: normal;
-    -fx-text-alignment: center;
-    -fx-alignment: center;
-    -fx-line-height: 1;
+.calendar-today {
+    -fx-border-color: -secondary-500;
+    -fx-border-width: 2px;
+    -fx-background-color: -secondary-300;
 }
 
-.label {
-   -fx-text-fill: -neutral-900;
-   -fx-font-family: "Roboto";
-   -fx-font-size: 16px;
-   -fx-font-weight: bold;
-   -fx-text-alignment: left;
-   -fx-line-height: 1;
+.search-icon {
+        -fx-stroke: -neutral-900;
+        -fx-stroke-width: 1;
+    -fx-fill: -neutral-900;
 }
 
-.user-text {
-    -fx-text-fill: -neutral-900;
-    -fx-font-family: "Roboto";
-    -fx-font-size: 16px;
-    -fx-font-weight: normal;
-    -fx-text-alignment: left !important;
-    -fx-line-height: 1;
+.search-bar {
+-fx-padding: 4px 0 4px 28px;
+-fx-font-size: 16px;
 }
 
-.link {
-    -fx-text-fill: -neutral-900;
-    -fx-font-family: "Roboto";
-    -fx-font-size: 16px;
-    -fx-font-weight: normal;
-    -fx-border-width: 0;
-    -fx-underline: true;
-    -fx-line-height: 1;
-}
-
-.heading, .label, .user-text, .link {
-    -fx-padding: 0;
-}
-
-.bad-zone {
-    -fx-text-fill: red;
-    -fx-font-size: 20;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-    -fx-border-color: red;
-    -fx-background-color: -neutral-100;
-}
-
-.bye-bye {
-    -fx-text-fill: -neutral-900;;
-    -fx-font-size: 20;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-    -fx-border-color: -neutral-900;
-    -fx-background-color: -neutral-100;
-}
 
 
 
