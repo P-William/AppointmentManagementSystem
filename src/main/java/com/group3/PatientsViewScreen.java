@@ -1,5 +1,7 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Patient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +12,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.*;
 
+@RequiredArgsConstructor
 public class PatientsViewScreen extends Application {
     @FXML
     public Label email;
@@ -40,13 +45,18 @@ public class PatientsViewScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private Patient patient;
+
+    @Setter
+    private ApplicationState applicationState;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Patients > Brooke Cronin");
+
     }
 
     @Override
@@ -86,6 +96,27 @@ public class PatientsViewScreen extends Application {
         stage.show();
     }
 
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+        pageTitle.setText("Patients > " + patient.getFirstName() + " " + patient.getLastName());
+        firstName.setText(patient.getFirstName());
+        lastName.setText(patient.getLastName());
+        email.setText(patient.getEmail());
+        phone.setText(patient.getPhoneNumber());
+        address.setText(patient.getAddress());
+
+        List<String> allergyList = patient.getAllergies();
+        allergies.setText(String.join(", ", allergyList));
+
+        List<String> conditionsList = patient.getMedicalConditions();
+        medicalConditions.setText(String.join(", ", conditionsList));
+
+        List<String> medicationList = patient.getMedications();
+        medication.setText(String.join(", ", medicationList));
+
+        language.setText(patient.getPrimaryLanguage());
+    }
+
     public void selectDashboard(ActionEvent actionEvent) throws IOException {
         switchScene("dashboard");
     }
@@ -109,6 +140,8 @@ public class PatientsViewScreen extends Application {
     public void changeFirstName(ActionEvent actionEvent) {
         String newFirstName = showInputDialog("Enter new first name:", firstName.getText());
         if (newFirstName != null) {
+            patient.setFirstName(newFirstName);
+            applicationState.saveState();
             firstName.setText(newFirstName);
         }
     }
@@ -116,6 +149,8 @@ public class PatientsViewScreen extends Application {
     public void changeLastName(ActionEvent actionEvent) {
         String newLastName = showInputDialog("Enter new last name:", lastName.getText());
         if (newLastName != null) {
+            patient.setLastName(newLastName);
+            applicationState.saveState();
             lastName.setText(newLastName);
         }
     }
@@ -123,6 +158,8 @@ public class PatientsViewScreen extends Application {
     public void changeEmail(ActionEvent actionEvent) {
         String newEmail = showInputDialog("Enter new email:", email.getText());
         if (newEmail != null) {
+            patient.setEmail(newEmail);
+            applicationState.saveState();
             email.setText(newEmail);
         }
     }
@@ -130,6 +167,8 @@ public class PatientsViewScreen extends Application {
     public void changePhone(ActionEvent actionEvent) {
         String newPhone = showInputDialog("Enter new phone number:", phone.getText());
         if (newPhone != null) {
+            patient.setPhoneNumber(newPhone);
+            applicationState.saveState();
             phone.setText(newPhone);
         }
     }
@@ -137,6 +176,8 @@ public class PatientsViewScreen extends Application {
     public void changeAddress(ActionEvent actionEvent) {
         String newAddress = showInputDialog("Enter new address:", address.getText());
         if (newAddress != null) {
+            patient.setAddress(newAddress);
+            applicationState.saveState();
             address.setText(newAddress);
         }
     }
@@ -145,6 +186,8 @@ public class PatientsViewScreen extends Application {
         List<String> currentAllergies = Arrays.asList(allergies.getText().split(",\\s*"));
         List<String> updatedAllergies = showListChangeDialog("Edit allergies:", currentAllergies);
         if (updatedAllergies != null) {
+            patient.setAllergies(updatedAllergies);
+            applicationState.saveState();
             allergies.setText(String.join(", ", updatedAllergies));
         }
     }
@@ -153,6 +196,8 @@ public class PatientsViewScreen extends Application {
         List<String> currentConditions = Arrays.asList(medicalConditions.getText().split(",\\s*"));
         List<String> updatedConditions = showListChangeDialog("Edit medical conditions:", currentConditions);
         if (updatedConditions != null) {
+            patient.setMedicalConditions(updatedConditions);
+            applicationState.saveState();
             medicalConditions.setText(String.join(", ", updatedConditions));
         }
     }
@@ -161,6 +206,8 @@ public class PatientsViewScreen extends Application {
         List<String> currentMedication = Arrays.asList(medication.getText().split(",\\s*"));
         List<String> updatedMedication = showListChangeDialog("Edit medications:", currentMedication);
         if (updatedMedication != null) {
+            patient.setMedications(updatedMedication);
+            applicationState.saveState();
             medication.setText(String.join(", ", updatedMedication));
         }
     }
@@ -168,6 +215,8 @@ public class PatientsViewScreen extends Application {
     public void changeLanguage(ActionEvent actionEvent) {
         String newLanguage = showInputDialog("Enter primary language:", language.getText());
         if (newLanguage != null) {
+            patient.setPrimaryLanguage(newLanguage);
+            applicationState.saveState();
             language.setText(newLanguage);
         }
     }

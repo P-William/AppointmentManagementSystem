@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Patient;
+import com.group3.objects.PatientObjectFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +20,27 @@ import java.util.Objects;
 public class PatientsSearchScreen extends Application {
     @FXML
     public TextField searchField;
+    @FXML
+    public VBox patientList;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
 
+    private PatientObjectFactory patientObjectFactory;
+    private ApplicationState applicationState;
+    
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
+
+        patientObjectFactory = new PatientObjectFactory(this);
+        patientObjectFactory.populatePatients(patientList, applicationState.getPatients());
+
+
     }
 
     @Override
@@ -90,10 +105,14 @@ public class PatientsSearchScreen extends Application {
         System.out.println("Search term: "+searchField.getText());
     }
 
-    public void viewPatient(ActionEvent actionEvent) throws IOException {
+    public void viewPatient(ActionEvent actionEvent, Patient patient) throws IOException {
         // Load FXML layout
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientsViewLayout.fxml"));
         BorderPane root = loader.load();
+
+        PatientsViewScreen screen = loader.getController();
+        screen.setPatient(patient);
+        screen.setApplicationState(applicationState);
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
