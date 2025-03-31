@@ -20,8 +20,8 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.CreateAppointmentScreen"
-            stylesheets="@createAppointmentStyle.css" styleClass="main">
+            fx:controller="com.group3.AppointmentViewScreen"
+            stylesheets="@appointmentViewStyle.css" styleClass="main">
     <top>
         <TextFlow>
             <Text text="Doctor " styleClass="logo-doctor"/>
