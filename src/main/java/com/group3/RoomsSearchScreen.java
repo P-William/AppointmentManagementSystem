@@ -1,5 +1,6 @@
 package com.group3;
 
+import com.group3.factories.RoomFactory;
 import com.group3.objects.ApplicationState;
 import com.group3.objects.PatientObjectFactory;
 import com.group3.objects.Room;
@@ -37,6 +38,8 @@ public class RoomsSearchScreen extends Application {
         });
 
         applicationState = ApplicationState.loadState();
+
+        applicationState.addRoom(RoomFactory.createRoom("Surgery"));
 
         roomObjectFactory = new RoomObjectFactory(this);
         roomObjectFactory.populateRooms(roomList, applicationState.getRooms());

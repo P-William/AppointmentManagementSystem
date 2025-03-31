@@ -21,7 +21,7 @@ public class DoctorObjectFactory {
     }
 
     public HBox createDoctorBox(Doctor doctor) {
-        Label name = new Label(doctor.getFirstName() + " " + doctor.getLastName());
+        Label name = new Label(doctor.getName());
         Label phone = new Label(doctor.getPhoneNumber());
         Label specialties = new Label(String.join(", ", doctor.getSpecialties()));
 

@@ -1,5 +1,7 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Appointment;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -55,6 +58,11 @@ public class AppointmentViewScreen extends Application {
     private ToggleButton calendarToggle;
     @FXML
     private VBox calendarDropdown;
+
+    private Appointment appointment;
+
+    @Setter
+    private ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -101,6 +109,18 @@ public class AppointmentViewScreen extends Application {
         stage.setTitle("Doctor Tracker");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+
+        checkIn.setText("Checkin");
+        patient.setText(appointment.getPatient().getName());
+        doctor.setText(appointment.getDoctor().getName());
+        room.setText(appointment.getRoomBooked().getRoomName());
+        date.setText(appointment.getAppointmentAt().toLocalDate().toString());
+        startTime.setText(appointment.getAppointmentAt().toLocalTime().toString());
+        endTime.setText(appointment.getAppointmentAt().toLocalTime().plus(appointment.getDuration()).toString());
     }
 
     public void selectDashboard(ActionEvent actionEvent) throws IOException {

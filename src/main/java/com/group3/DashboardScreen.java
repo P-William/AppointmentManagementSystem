@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Appointment;
+import com.group3.objects.AppointmentObjectFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,10 +22,15 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class DashboardScreen extends Application {
+    @FXML
+    public VBox appointmentList;
     @FXML private ToggleButton createToggle;
     @FXML private VBox createDropdown;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
+
+    private ApplicationState applicationState;
+    private AppointmentObjectFactory appointmentObjectFactory;
 
     @FXML
     public void initialize() {
@@ -35,7 +43,12 @@ public class DashboardScreen extends Application {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
+        appointmentObjectFactory = new AppointmentObjectFactory(this);
+        appointmentObjectFactory.populateAppointments(appointmentList, applicationState.getAppointments());
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -44,7 +57,7 @@ public class DashboardScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/dashboardStyle.css")).toExternalForm());
@@ -93,9 +106,21 @@ public class DashboardScreen extends Application {
         switchScene("roomsSearch");
     }
 
+    public void viewAppointment(ActionEvent actionEvent, Appointment appointment) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/appointmentViewLayout.fxml"));
+        BorderPane root = loader.load();
 
-    public void viewAppointment(MouseEvent mouseEvent) throws IOException {
-        switchScene("appointmentView");
+        AppointmentViewScreen appointmentViewScreen = loader.getController();
+        appointmentViewScreen.setAppointment(appointment);
+        appointmentViewScreen.setApplicationState(applicationState);
+
+        Scene scene = new Scene(root, 1270, 1024);
+        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/appointmentViewStyle.css")).toExternalForm());
+
+        stage.setTitle("Doctor Tracker");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void createAppointment(ActionEvent actionEvent) throws IOException {

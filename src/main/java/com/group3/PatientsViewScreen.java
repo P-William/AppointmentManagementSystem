@@ -23,9 +23,7 @@ public class PatientsViewScreen extends Application {
     @FXML
     public Label email;
     @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
+    public Label name;
     @FXML
     public Label phone;
     @FXML
@@ -98,9 +96,8 @@ public class PatientsViewScreen extends Application {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-        pageTitle.setText("Patients > " + patient.getFirstName() + " " + patient.getLastName());
-        firstName.setText(patient.getFirstName());
-        lastName.setText(patient.getLastName());
+        pageTitle.setText("Patients > " + patient.getName());
+        name.setText(patient.getName());
         email.setText(patient.getEmail());
         phone.setText(patient.getPhoneNumber());
         address.setText(patient.getAddress());
@@ -137,21 +134,12 @@ public class PatientsViewScreen extends Application {
         switchScene("roomsSearch");
     }
 
-    public void changeFirstName(ActionEvent actionEvent) {
-        String newFirstName = showInputDialog("Enter new first name:", firstName.getText());
-        if (newFirstName != null) {
-            patient.setFirstName(newFirstName);
+    public void changeName(ActionEvent actionEvent) {
+        String newName = showInputDialog("Enter a new name:", name.getText());
+        if (newName != null) {
+            patient.setName(newName);
             applicationState.saveState();
-            firstName.setText(newFirstName);
-        }
-    }
-
-    public void changeLastName(ActionEvent actionEvent) {
-        String newLastName = showInputDialog("Enter new last name:", lastName.getText());
-        if (newLastName != null) {
-            patient.setLastName(newLastName);
-            applicationState.saveState();
-            lastName.setText(newLastName);
+            name.setText(newName);
         }
     }
 

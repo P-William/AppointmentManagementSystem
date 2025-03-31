@@ -21,10 +21,6 @@ public class DoctorsViewScreen extends Application {
     @FXML
     public Label email;
     @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
-    @FXML
     public Label phone;
     @FXML
     public Label address;
@@ -32,6 +28,8 @@ public class DoctorsViewScreen extends Application {
     public Label specialities;
     @FXML
     public Label pageTitle;
+    @FXML
+    public Label name;
     @FXML
     private ToggleButton calendarToggle;
     @FXML
@@ -92,9 +90,8 @@ public class DoctorsViewScreen extends Application {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
 
-        pageTitle.setText("Doctor > " + doctor.getFirstName() + " " + doctor.getLastName());
-        firstName.setText(doctor.getFirstName());
-        lastName.setText(doctor.getLastName());
+        pageTitle.setText("Doctor > " + doctor.getName());
+        name.setText(doctor.getName());
         email.setText(doctor.getEmail());
         phone.setText(doctor.getPhoneNumber());
         specialities.setText(String.join(", ", doctor.getSpecialties()));
@@ -120,21 +117,12 @@ public class DoctorsViewScreen extends Application {
         switchScene("roomsSearch");
     }
 
-    public void changeFirstName(ActionEvent actionEvent) {
-        String newFirstName = showInputDialog("Enter new first name:", firstName.getText());
-        if (newFirstName != null) {
-            doctor.setFirstName(newFirstName);
+    public void changeName(ActionEvent actionEvent) {
+        String newName = showInputDialog("Enter a new name:", name.getText());
+        if (newName != null) {
+            doctor.setName(newName);
             applicationState.saveState();
-            firstName.setText(newFirstName);
-        }
-    }
-
-    public void changeLastName(ActionEvent actionEvent) {
-        String newLastName = showInputDialog("Enter new last name:", lastName.getText());
-        if (newLastName != null) {
-            doctor.setLastName(newLastName);
-            applicationState.saveState();
-            lastName.setText(newLastName);
+            name.setText(newName);
         }
     }
 

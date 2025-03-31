@@ -95,7 +95,7 @@
             </HBox>
             <Label styleClass="page-subheading">Today's appointments (March 22, 2025)</Label>
             <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
+                <VBox fx:id="appointmentList" VBox.vgrow="ALWAYS" maxWidth="Infinity">
                     <HBox styleClass="table-heading" maxWidth="Infinity">
                         <Label styleClass="date-size">Date and Time</Label>
                         <Label styleClass="patient-size">Patient</Label>
@@ -103,7 +103,7 @@
                         <Label styleClass="room-size">Room Number</Label>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
-                    <HBox onMouseClicked="#viewAppointment" styleClass="table-entry" maxWidth="Infinity">
+                    <HBox styleClass="table-entry" maxWidth="Infinity">
                         <Label styleClass="date-size">Mar 22, 2025 @ 13:00-13:30</Label>
                         <Label styleClass="patient-size">Brooke Cronin</Label>
                         <Label styleClass="doctor-size">Timmy Smith</Label>

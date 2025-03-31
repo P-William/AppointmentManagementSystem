@@ -23,7 +23,7 @@ public class PatientObjectFactory {
     }
 
     public HBox createPatientBox(Patient patient) {
-        Label fullName = new Label(patient.getFirstName() + " " + patient.getLastName());
+        Label fullName = new Label(patient.getName());
         Label email = new Label(patient.getEmail());
         Label phone = new Label(patient.getPhoneNumber());
         Label address = new Label(patient.getAddress());

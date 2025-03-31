@@ -1,5 +1,10 @@
 package com.group3;
 
+import com.group3.factories.AppointmentFactory;
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Doctor;
+import com.group3.objects.Patient;
+import com.group3.objects.Room;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -11,9 +16,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class CreateAppointmentScreen extends Application {
@@ -60,6 +69,17 @@ public class CreateAppointmentScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private Patient selectedPatient;
+    private Doctor selectedDoctor;
+    private Room selectedRoom;
+    private LocalDate selectedDate;
+    private LocalTime selectedStartTime;
+    private LocalTime selectedEndTime;
+    private Duration duration;
+    private String selectedReason;
+
+    private ApplicationState applicationState;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -67,6 +87,8 @@ public class CreateAppointmentScreen extends Application {
             calendarDropdown.setManaged(newVal);
         });
         pageTitle.setText("Create Appointment");
+
+        applicationState = ApplicationState.loadState();
         createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
@@ -148,26 +170,23 @@ public class CreateAppointmentScreen extends Application {
     }
 
     public void choosePatient(ActionEvent actionEvent) {
-        String currentPatient = patient.getText();
-        String newPatient = showTextPickerDialog("Select patient:", currentPatient, new ArrayList<>(Arrays.asList("Brooke Cronin", "Connor Miller", "Pen Cui", "William Paetz")));
-        if (newPatient != null) {
-            patient.setText(newPatient);
+        selectedPatient = showPatientPickerDialog(applicationState.getPatients());
+        if (selectedPatient != null) {
+            patient.setText(selectedPatient.getName());
         }
     }
 
     public void chooseDoctor(ActionEvent actionEvent) {
-        String currentDoctor = doctor.getText();
-        String newDoctor = showTextPickerDialog("Select doctor:", currentDoctor, new ArrayList<>(Arrays.asList("Timmy Smith", "Marcus Foster", "Natalie Crawford", "Felicity Morgan", "Malcolm Pierce", "Jasper Hammond")));
-        if (newDoctor != null) {
-            doctor.setText(newDoctor);
+        selectedDoctor = showDoctorPickerDialog(applicationState.getDoctors());
+        if (selectedDoctor != null) {
+            doctor.setText(selectedDoctor.getName());
         }
     }
 
     public void chooseRoom(ActionEvent actionEvent) {
-        String currentRoom = room.getText();
-        String newRoom = showTextPickerDialog("Select room:", currentRoom, new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5")));
-        if (newRoom != null) {
-            room.setText(newRoom);
+        selectedRoom = showRoomPickerDialog(applicationState.getRooms());
+        if (selectedRoom != null) {
+            room.setText(selectedRoom.getRoomName());
         }
     }
 
@@ -189,24 +208,26 @@ public class CreateAppointmentScreen extends Application {
 
         LocalDate newDate = showDatePickerDialog("Select appointment date:", currentDate);
         if (newDate != null) {
+            selectedDate = newDate;
             date.setText(newDate.toString());
         }
     }
 
-
     public void chooseStartTime(ActionEvent actionEvent) {
         String currentStart = startTime.getText();
-        String newTime = showTimePickerDialog("Select start time:", currentStart);
+        LocalTime newTime = showTimePickerDialog("Select start time:", currentStart);
         if (newTime != null) {
-            startTime.setText(newTime);
+            selectedStartTime = newTime;
+            startTime.setText(newTime.toString());
         }
     }
 
     public void chooseEndTime(ActionEvent actionEvent) {
         String currentEnd = endTime.getText();
-        String newTime = showTimePickerDialog("Select end time:", currentEnd);
+        LocalTime newTime = showTimePickerDialog("Select end time:", currentEnd);
         if (newTime != null) {
-            endTime.setText(newTime);
+            selectedEndTime = newTime;
+            endTime.setText(newTime.toString());
         }
     }
 
@@ -233,6 +254,119 @@ public class CreateAppointmentScreen extends Application {
         return result.orElse(null);
     }
 
+    private Patient showPatientPickerDialog(List<Patient> patients) {
+        Dialog<Patient> dialog = new Dialog<>();
+        dialog.setTitle("Edit Appointment Info");
+        dialog.setHeaderText("Edit Patient Choice: ");
+
+        ComboBox<Patient> comboBox = new ComboBox<>(FXCollections.observableArrayList(patients));
+        comboBox.setEditable(false);
+
+        if (!patients.isEmpty()) {
+            comboBox.setValue(patients.get(0));
+        }
+
+        comboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Patient patient) {
+                return (patient != null) ? patient.getName() : "";
+            }
+
+            @Override
+            public Patient fromString(String s) {
+                return null;
+            }
+        });
+
+        dialog.getDialogPane().setContent(comboBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(button -> {
+            if (button == ButtonType.OK) {
+                return comboBox.getValue();
+            }
+            return null;
+        });
+
+        Optional<Patient> result = dialog.showAndWait();
+        return result.orElse(null);
+    }
+
+    private Doctor showDoctorPickerDialog(List<Doctor> doctors) {
+        Dialog<Doctor> dialog = new Dialog<>();
+        dialog.setTitle("Edit Appointment Info");
+        dialog.setHeaderText("Edit Doctor Choice: ");
+
+        ComboBox<Doctor> comboBox = new ComboBox<>(FXCollections.observableArrayList(doctors));
+        comboBox.setEditable(false);
+
+        if (!doctors.isEmpty()) {
+            comboBox.setValue(doctors.get(0));
+        }
+
+        comboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Doctor doctor) {
+                return (doctor != null) ? doctor.getName() : "";
+            }
+
+            @Override
+            public Doctor fromString(String s) {
+                return null;
+            }
+        });
+
+        dialog.getDialogPane().setContent(comboBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(button -> {
+            if (button == ButtonType.OK) {
+                return comboBox.getValue();
+            }
+            return null;
+        });
+
+        Optional<Doctor> result = dialog.showAndWait();
+        return result.orElse(null);
+    }
+
+    private Room showRoomPickerDialog(List<Room> rooms) {
+        Dialog<Room> dialog = new Dialog<>();
+        dialog.setTitle("Edit Appointment Info");
+        dialog.setHeaderText("Edit Room Choice: ");
+
+        ComboBox<Room> comboBox = new ComboBox<>(FXCollections.observableArrayList(rooms));
+        comboBox.setEditable(false);
+
+        if (!rooms.isEmpty()) {
+            comboBox.setValue(rooms.get(0));
+        }
+
+        comboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Room room) {
+                return (room != null) ? room.getRoomName() : "";
+            }
+
+            @Override
+            public Room fromString(String s) {
+                return null;
+            }
+        });
+
+        dialog.getDialogPane().setContent(comboBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(button -> {
+            if (button == ButtonType.OK) {
+                return comboBox.getValue();
+            }
+            return null;
+        });
+
+        Optional<Room> result = dialog.showAndWait();
+        return result.orElse(null);
+    }
 
     private String showInputDialog(String message, String defaultValue) {
         TextInputDialog dialog = new TextInputDialog(defaultValue);
@@ -264,7 +398,7 @@ public class CreateAppointmentScreen extends Application {
         return result.orElse(null);
     }
 
-    private String showTimePickerDialog(String message, String defaultTime) {
+    private LocalTime showTimePickerDialog(String message, String defaultTime) {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Edit Appointment Info");
         dialog.setHeaderText(message);
@@ -275,7 +409,6 @@ public class CreateAppointmentScreen extends Application {
             timeOptions.add(String.format("%02d:15", hour));
             timeOptions.add(String.format("%02d:30", hour));
             timeOptions.add(String.format("%02d:45", hour));
-
         }
 
         ComboBox<String> comboBox = new ComboBox<>(FXCollections.observableArrayList(timeOptions));
@@ -293,12 +426,22 @@ public class CreateAppointmentScreen extends Application {
         });
 
         Optional<String> result = dialog.showAndWait();
-        return result.orElse(null);
+        return result.map(LocalTime::parse).orElse(null);
     }
-
 
     public void finalizeCreation(ActionEvent actionEvent) {
-        System.out.println("send to server");
-    }
+        if (selectedPatient == null || selectedDoctor == null || selectedRoom == null || selectedReason == null || selectedDate == null || selectedStartTime == null || selectedEndTime == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Appointment");
+            alert.setHeaderText("All fields must be valid");
+            return;
+        }
+        else {
+            Duration dur = Duration.between(selectedStartTime, selectedEndTime);
+            LocalDateTime time = selectedDate.atTime(selectedStartTime);
 
+            applicationState.addAppointment(AppointmentFactory.createAppointment(selectedPatient, selectedDoctor, selectedRoom, time, dur, selectedReason));
+            applicationState.saveState();
+        }
+    }
 }
