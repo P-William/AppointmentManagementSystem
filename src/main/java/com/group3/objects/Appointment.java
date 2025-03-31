@@ -10,7 +10,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(access = AccessLevel.PRIVATE)
+@Builder
 public class Appointment {
     private UUID appointmentId;
     private LocalDateTime createdAt;
@@ -23,27 +23,6 @@ public class Appointment {
 
     private String reasonForVisit;
     private Status status;
-
-    public static Appointment create(
-        Patient patient,
-        Doctor doctor,
-        Room room,
-        LocalDateTime appointmentTime,
-        Duration duration,
-        String reasonForVisit
-    ) {
-        return Appointment.builder()
-            .appointmentId(UUID.randomUUID())
-            .createdAt(LocalDateTime.now())
-            .patient(patient)
-            .doctor(doctor)
-            .roomBooked(room)
-            .appointmentAt(appointmentTime)
-            .duration(duration)
-            .reasonForVisit(reasonForVisit)
-            .status(Status.PENDING)
-            .build();
-    }
 
     public enum Status {
         PENDING,
