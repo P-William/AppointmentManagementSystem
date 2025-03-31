@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(access = AccessLevel.PRIVATE)
+@Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Doctor {
     @Setter(AccessLevel.NONE)
@@ -30,21 +30,6 @@ public class Doctor {
     @JsonIgnore
     @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
-
-    public static Doctor create(
-        String firstName,
-        String lastName,
-        String email,
-        String phoneNumber
-    ) {
-        return Doctor.builder()
-            .doctorId(UUID.randomUUID())
-            .firstName(firstName)
-            .lastName(lastName)
-            .email(email)
-            .phoneNumber(phoneNumber)
-            .build();
-    }
 
     public void addSpecialty(String specialty) {
         specialties.add(specialty);

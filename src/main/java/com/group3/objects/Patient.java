@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(access = AccessLevel.PRIVATE)
+@Builder
 @JsonInclude(Include.NON_EMPTY)
 public class Patient {
     @Setter(AccessLevel.NONE)
