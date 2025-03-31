@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.NONE)
 public final class AppointmentFactory {
 
-    public static Duration DEFAULT_APPOINTMENT_DURATION = Duration.ofMinutes(30);
+    public static final Duration DEFAULT_APPOINTMENT_DURATION = Duration.ofMinutes(30);
 
     public static Appointment createAppointment(
         Patient patient,
