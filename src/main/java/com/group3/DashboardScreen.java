@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class DashboardScreen extends Application {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
 
@@ -27,6 +29,11 @@ public class DashboardScreen extends Application {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
+        });
+
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
         });
     }
     @Override
@@ -89,5 +96,18 @@ public class DashboardScreen extends Application {
 
     public void viewAppointment(MouseEvent mouseEvent) throws IOException {
         switchScene("appointmentView");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) {
+    }
+
+    public void createDoctor(ActionEvent actionEvent) {
+    }
+
+    public void createRoom(ActionEvent actionEvent) {
     }
 }
