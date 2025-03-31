@@ -20,8 +20,8 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.CreatePatientScreen"
-            stylesheets="@createPatientStyle.css" styleClass="main">
+            fx:controller="com.group3.CreateRoomScreen"
+            stylesheets="@createRoomStyle.css" styleClass="main">
     <top>
         <TextFlow>
             <Text text="Doctor " styleClass="logo-doctor"/>
@@ -77,80 +77,18 @@
     </left>
     <center>
         <VBox styleClass="page">
-            <Label fx:id="pageTitle" styleClass="page-title">Create Patient</Label>
-            <HBox styleClass="settings">
-                <Label styleClass="label">First Name</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="firstName" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseFirstName" styleClass="link" text="Change" />
-            </HBox>
+            <Label fx:id="pageTitle" styleClass="page-title">Create Room</Label>
 
             <HBox styleClass="settings">
-                <Label styleClass="label">Last Name</Label>
+                <Label styleClass="label">Room Name</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="lastName" styleClass="user-text">None</Label>
+                <Label fx:id="roomName" styleClass="user-text">None</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseLastName" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Email</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="email" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseEmail" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Phone</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="phone" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#choosePhone" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Address</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="address" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseAddress" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Allergies</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="allergies" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseAllergies" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Medical Conditions</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="medicalConditions" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseMedicalConditions" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Medications</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="medication" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseMedication" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Language</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="language" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseLanguage" styleClass="link" text="Change" />
+                <Hyperlink onAction="#chooseRoomName" styleClass="link" text="Change" />
             </HBox>
 
             <Button onAction="#finalizeCreation" text="Create"/>
         </VBox>
+
     </center>
 </BorderPane>
