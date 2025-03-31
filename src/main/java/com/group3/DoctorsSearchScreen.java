@@ -38,8 +38,6 @@ public class DoctorsSearchScreen extends Application {
 
         applicationState = ApplicationState.loadState();
 
-        applicationState.addDoctor(Doctor.create("bib", "bob", "123", "456"));
-
         doctorObjectFactory = new DoctorObjectFactory(this);
         doctorObjectFactory.populateDoctors(doctorList, applicationState.getDoctors());
     }
