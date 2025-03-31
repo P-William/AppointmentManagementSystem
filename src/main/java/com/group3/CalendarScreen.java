@@ -26,6 +26,8 @@ import java.util.Objects;
 
 
 public class CalendarScreen extends Application {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML public GridPane calendarGrid;
     @FXML public Label monthYearLabel;
     @FXML public TextField searchField;
@@ -41,6 +43,11 @@ public class CalendarScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
         populateCalendar(displayYearMonth);
     }
     private void populateCalendar(YearMonth yearMonth) {
@@ -201,6 +208,22 @@ public class CalendarScreen extends Application {
 
     public void selectRooms(ActionEvent actionEvent) throws IOException {
         switchScene("roomsSearch");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
+    }
+
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
+    }
+
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 
     @FXML

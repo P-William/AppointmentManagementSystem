@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class RoomsViewScreen extends Application {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public Label name;
     @FXML
@@ -37,6 +39,11 @@ public class RoomsViewScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
 
     }
 
@@ -103,6 +110,22 @@ public class RoomsViewScreen extends Application {
 
     public void selectRooms(ActionEvent actionEvent) throws IOException {
         switchScene("roomsSearch");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
+    }
+
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
+    }
+
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 
     public void changeName(ActionEvent actionEvent) {

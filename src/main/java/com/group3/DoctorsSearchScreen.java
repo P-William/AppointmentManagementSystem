@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class DoctorsSearchScreen extends Application {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public TextField searchField;
     @FXML
@@ -35,6 +37,11 @@ public class DoctorsSearchScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
 
         applicationState = ApplicationState.loadState();
 
@@ -98,6 +105,22 @@ public class DoctorsSearchScreen extends Application {
 
     public void selectRooms(ActionEvent actionEvent) throws IOException {
         switchScene("roomsSearch");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
+    }
+
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
+    }
+
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 
     public void searchEntered(ActionEvent actionEvent) {

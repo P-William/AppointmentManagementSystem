@@ -61,6 +61,14 @@
                     <SVGPath styleClass="btn-rooms-icon" content="M20.625 19.875V4.12501H16.5V0.609619L4.125 2.74323V19.875H0.75V21.375H4.82344L16.5 22.9855V5.62501H19.125V21.375H23.25V19.875H20.625ZM15 21.2645L5.625 19.9714V4.00679L15 2.39063V21.2645ZM12 10.875H13.5V13.875H12V10.875Z"/>
                 </graphic>
                 </ToggleButton>
+                <Region VBox.vgrow="ALWAYS"/>
+                <ToggleButton fx:id="createToggle" styleClass="btn-create">+</ToggleButton>
+                <VBox fx:id="createDropdown" visible="false" managed="false" styleClass="create-dropdown-container">
+                    <Button onAction="#createAppointment" styleClass="create-dropdown-item">Create Appointment</Button>
+                    <Button onAction="#createPatient" styleClass="create-dropdown-item">Create Patient</Button>
+                    <Button onAction="#createDoctor" styleClass="create-dropdown-item">Create Doctor</Button>
+                    <Button onAction="#createRoom" styleClass="create-dropdown-item">Create Room</Button>
+                </VBox>
             </VBox>
             <Region prefWidth="12"></Region>
         </HBox>

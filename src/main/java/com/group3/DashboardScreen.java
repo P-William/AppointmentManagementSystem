@@ -53,6 +53,7 @@ public class DashboardScreen extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Load FXML layout
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/patientsViewLayout.fxml"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/dashboardLayout.fxml"));
         BorderPane root = loader.load();
 
@@ -60,6 +61,7 @@ public class DashboardScreen extends Application {
         Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
+//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsViewStyle.css")).toExternalForm());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/dashboardStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage

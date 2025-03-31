@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AppointmentViewScreen extends Application {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public Label email;
     @FXML
@@ -71,6 +73,11 @@ public class AppointmentViewScreen extends Application {
             calendarDropdown.setManaged(newVal);
         });
         pageTitle.setText("Appointment > Brooke Cronin, Timmy Smith, Room 1 @ 13:00-13:30");
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
     }
 
     @Override
@@ -141,6 +148,22 @@ public class AppointmentViewScreen extends Application {
 
     public void selectRooms(ActionEvent actionEvent) throws IOException {
         switchScene("roomsSearch");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
+    }
+
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
+    }
+
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 
     public void markPresent(ActionEvent actionEvent) {

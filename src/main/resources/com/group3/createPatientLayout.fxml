@@ -79,7 +79,7 @@
         <VBox styleClass="page">
             <Label fx:id="pageTitle" styleClass="page-title">Create Patient</Label>
             <HBox styleClass="settings">
-                <Label styleClass="label">First Name</Label>
+                <Label styleClass="label">Full Name</Label>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label fx:id="name" styleClass="user-text">None</Label>
                 <Region HBox.hgrow="ALWAYS"/>
@@ -142,7 +142,7 @@
                 <Hyperlink onAction="#chooseLanguage" styleClass="link" text="Change" />
             </HBox>
 
-            <Button onAction="#finalizeCreation" text="Create"/>
+            <Button styleClass="btn-create-thing" onAction="#finalizeCreation">Create</Button>
         </VBox>
     </center>
 </BorderPane>
