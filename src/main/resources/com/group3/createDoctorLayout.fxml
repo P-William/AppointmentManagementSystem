@@ -20,8 +20,8 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.CreatePatientScreen"
-            stylesheets="@createPatientStyle.css" styleClass="main">
+            fx:controller="com.group3.CreateDoctorScreen"
+            stylesheets="@createDoctorStyle.css" styleClass="main">
     <top>
         <TextFlow>
             <Text text="Doctor " styleClass="logo-doctor"/>
@@ -77,7 +77,8 @@
     </left>
     <center>
         <VBox styleClass="page">
-            <Label fx:id="pageTitle" styleClass="page-title">Create Patient</Label>
+            <Label fx:id="pageTitle" styleClass="page-title">Create Doctor</Label>
+
             <HBox styleClass="settings">
                 <Label styleClass="label">First Name</Label>
                 <Region HBox.hgrow="ALWAYS"/>
@@ -111,46 +112,15 @@
             </HBox>
 
             <HBox styleClass="settings">
-                <Label styleClass="label">Address</Label>
+                <Label styleClass="label">Specialties</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="address" styleClass="user-text">None</Label>
+                <Label fx:id="specialties" styleClass="user-text">None</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseAddress" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Allergies</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="allergies" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseAllergies" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Medical Conditions</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="medicalConditions" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseMedicalConditions" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Medications</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="medication" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseMedication" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Language</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="language" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseLanguage" styleClass="link" text="Change" />
+                <Hyperlink onAction="#chooseSpecialties" styleClass="link" text="Change" />
             </HBox>
 
             <Button onAction="#finalizeCreation" text="Create"/>
         </VBox>
+
     </center>
 </BorderPane>

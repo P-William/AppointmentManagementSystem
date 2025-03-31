@@ -53,6 +53,8 @@ public class CreateAppointmentScreen extends Application {
     public Label endTime;
     @FXML
     public Label reasonForVisit;
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     private ToggleButton calendarToggle;
     @FXML
@@ -65,20 +67,24 @@ public class CreateAppointmentScreen extends Application {
             calendarDropdown.setManaged(newVal);
         });
         pageTitle.setText("Create Appointment");
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/appointmentViewLayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/createAppointmentLayout.fxml"));
         BorderPane root = loader.load();
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
 
         // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/appointmentViewStyle.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createAppointmentStyle.css")).toExternalForm());
 //        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
         // Configure the stage
         primaryStage.setTitle("Doctor Tracker");
@@ -123,6 +129,22 @@ public class CreateAppointmentScreen extends Application {
 
     public void selectRooms(ActionEvent actionEvent) throws IOException {
         switchScene("roomsSearch");
+    }
+
+    public void createAppointment(ActionEvent actionEvent) throws IOException {
+        switchScene("createAppointment");
+    }
+
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
+    }
+
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
+    }
+
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 
     public void choosePatient(ActionEvent actionEvent) {
@@ -278,4 +300,5 @@ public class CreateAppointmentScreen extends Application {
     public void finalizeCreation(ActionEvent actionEvent) {
         System.out.println("send to server");
     }
+
 }
