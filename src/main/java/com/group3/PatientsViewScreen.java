@@ -65,7 +65,7 @@ public class PatientsViewScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/patientsViewStyle.css")).toExternalForm());
@@ -85,7 +85,7 @@ public class PatientsViewScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 

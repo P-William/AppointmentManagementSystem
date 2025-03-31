@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.factories.RoomFactory;
+import com.group3.objects.ApplicationState;
+import com.group3.objects.DisplayUtilities;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,49 +19,21 @@ import java.util.*;
 
 public class CreateRoomScreen extends Application {
     @FXML
-    public Label email;
-    @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
-    @FXML
-    public Label phone;
-    @FXML
-    public Label address;
-    @FXML
-    public Label allergies;
-    @FXML
-    public Label medicalConditions;
-    @FXML
-    public Label medication;
-    @FXML
-    public Label language;
-    @FXML
     public Label pageTitle;
     @FXML
-    public CheckBox checkIn;
-    @FXML
-    public Label patient;
-    @FXML
-    public Label doctor;
-    @FXML
-    public Label room;
-    @FXML
-    public Label date;
-    @FXML
-    public Label startTime;
-    @FXML
-    public Label endTime;
-    @FXML
-    public Label reasonForVisit;
-    @FXML
     public Label roomName;
-    @FXML private ToggleButton createToggle;
-    @FXML private VBox createDropdown;
+    @FXML
+    private ToggleButton createToggle;
+    @FXML
+    private VBox createDropdown;
     @FXML
     private ToggleButton calendarToggle;
     @FXML
     private VBox calendarDropdown;
+
+    private String selectedName;
+
+    private ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -71,6 +46,8 @@ public class CreateRoomScreen extends Application {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
     }
 
     @Override
@@ -81,7 +58,7 @@ public class CreateRoomScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createPatientStyle.css")).toExternalForm());
@@ -102,7 +79,7 @@ public class CreateRoomScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 
@@ -149,7 +126,8 @@ public class CreateRoomScreen extends Application {
 
     public void chooseRoomName(ActionEvent actionEvent) {
         String newRoomName = showInputDialog("Enter room name:", roomName.getText());
-        if (newRoomName != null && !newRoomName.trim().isEmpty()) {
+        if (newRoomName != null && !newRoomName.trim().isEmpty() && !newRoomName.equals("None")) {
+            selectedName = newRoomName;
             roomName.setText(newRoomName.trim());
         }
     }
@@ -165,7 +143,18 @@ public class CreateRoomScreen extends Application {
     }
 
     public void finalizeCreation(ActionEvent actionEvent) {
-        System.out.println("send to server");
+        if (selectedName == null || selectedName.equals("None")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Room");
+            alert.setHeaderText("Room name must be valid");
+            alert.show();
+            return;
+        }
+
+        applicationState.addRoom(RoomFactory.createRoom(selectedName));
+
+        DisplayUtilities.displaySuccess();
+        applicationState.saveState();
     }
 
 

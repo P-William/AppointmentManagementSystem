@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.factories.DoctorFactory;
+import com.group3.objects.ApplicationState;
+import com.group3.objects.DisplayUtilities;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +21,7 @@ public class CreateDoctorScreen extends Application {
     @FXML
     public Label email;
     @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
+    public Label name;
     @FXML
     public Label phone;
     @FXML
@@ -60,6 +61,13 @@ public class CreateDoctorScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private String selectedName;
+    private String selectedEmail;
+    private String selectedPhone;
+    private List<String> selectedSpecialties;
+
+    private ApplicationState applicationState;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -71,6 +79,8 @@ public class CreateDoctorScreen extends Application {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
     }
 
     @Override
@@ -81,7 +91,7 @@ public class CreateDoctorScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createDoctorStyle.css")).toExternalForm());
@@ -102,7 +112,7 @@ public class CreateDoctorScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 
@@ -147,23 +157,18 @@ public class CreateDoctorScreen extends Application {
         switchScene("createRoom");
     }
 
-    public void chooseFirstName(ActionEvent actionEvent) {
-        String newFirstName = showInputDialog("Enter first name:", firstName.getText());
-        if (newFirstName != null) {
-            firstName.setText(newFirstName);
-        }
-    }
-
-    public void chooseLastName(ActionEvent actionEvent) {
-        String newLastName = showInputDialog("Enter last name:", lastName.getText());
-        if (newLastName != null) {
-            lastName.setText(newLastName);
+    public void chooseName(ActionEvent actionEvent) {
+        String newName = showInputDialog("Enter a name:", name.getText());
+        if (newName != null) {
+            selectedName = newName;
+            name.setText(newName);
         }
     }
 
     public void chooseEmail(ActionEvent actionEvent) {
         String newEmail = showInputDialog("Enter email:", email.getText());
         if (newEmail != null) {
+            selectedEmail = newEmail;
             email.setText(newEmail);
         }
     }
@@ -171,6 +176,7 @@ public class CreateDoctorScreen extends Application {
     public void choosePhone(ActionEvent actionEvent) {
         String newPhone = showInputDialog("Enter phone number:", phone.getText());
         if (newPhone != null) {
+            selectedPhone = newPhone;
             phone.setText(newPhone);
         }
     }
@@ -183,12 +189,12 @@ public class CreateDoctorScreen extends Application {
 
         List<String> updatedSpecialties = showListPickerDialog("Edit specialties:", currentSpecialties);
         if (updatedSpecialties != null && !updatedSpecialties.isEmpty()) {
+            selectedSpecialties = updatedSpecialties;
             specialties.setText(String.join(", ", updatedSpecialties));
         } else {
             specialties.setText("None");
         }
     }
-
 
     private List<String> showListPickerDialog(String message, List<String> defaultValue) {
         Dialog<List<String>> dialog = new Dialog<>();
@@ -254,7 +260,21 @@ public class CreateDoctorScreen extends Application {
     }
 
     public void finalizeCreation(ActionEvent actionEvent) {
-        System.out.println("send to server");
+        if (selectedName == null || selectedEmail == null || selectedPhone == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Doctor");
+            alert.setHeaderText("Name , Email, and Phone Number must be valid");
+            alert.show();
+        }
+        else if (selectedSpecialties == null) {
+            applicationState.addDoctor(DoctorFactory.createDoctor(selectedName, selectedEmail, selectedPhone));
+        }
+        else {
+            applicationState.addDoctor(DoctorFactory.createDoctor(selectedName, selectedEmail, selectedPhone, selectedSpecialties));
+        }
+
+        DisplayUtilities.displaySuccess();
+        applicationState.saveState();
     }
 
 

@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.factories.PatientFactory;
+import com.group3.objects.ApplicationState;
+import com.group3.objects.DisplayUtilities;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +21,7 @@ public class CreatePatientScreen extends Application {
     @FXML
     public Label email;
     @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
+    public Label name;
     @FXML
     public Label phone;
     @FXML
@@ -58,6 +59,17 @@ public class CreatePatientScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private ApplicationState applicationState;
+
+    private String selectedName;
+    private String selectedEmail;
+    private String selectedPhoneNum;
+    private String selectedAddress;
+    private List<String> selectedMedicalConditions;
+    private List<String> selectedMedications;
+    private List<String> selectedAllergies;
+    private String selectedLanguage;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -69,6 +81,8 @@ public class CreatePatientScreen extends Application {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
     }
 
     @Override
@@ -79,7 +93,7 @@ public class CreatePatientScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createPatientStyle.css")).toExternalForm());
@@ -100,7 +114,7 @@ public class CreatePatientScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 
@@ -145,23 +159,18 @@ public class CreatePatientScreen extends Application {
         switchScene("createRoom");
     }
 
-    public void chooseFirstName(ActionEvent actionEvent) {
-        String newFirstName = showInputDialog("Enter first name:", firstName.getText());
-        if (newFirstName != null) {
-            firstName.setText(newFirstName);
-        }
-    }
-
-    public void chooseLastName(ActionEvent actionEvent) {
-        String newLastName = showInputDialog("Enter last name:", lastName.getText());
-        if (newLastName != null) {
-            lastName.setText(newLastName);
+    public void chooseName(ActionEvent actionEvent) {
+        String newName = showInputDialog("Enter a name:", name.getText());
+        if (newName != null) {
+            selectedName = newName;
+            name.setText(newName);
         }
     }
 
     public void chooseEmail(ActionEvent actionEvent) {
         String newEmail = showInputDialog("Enter email:", email.getText());
         if (newEmail != null) {
+            selectedEmail = newEmail;
             email.setText(newEmail);
         }
     }
@@ -169,6 +178,7 @@ public class CreatePatientScreen extends Application {
     public void choosePhone(ActionEvent actionEvent) {
         String newPhone = showInputDialog("Enter phone number:", phone.getText());
         if (newPhone != null) {
+            selectedPhoneNum = newPhone;
             phone.setText(newPhone);
         }
     }
@@ -176,6 +186,7 @@ public class CreatePatientScreen extends Application {
     public void chooseAddress(ActionEvent actionEvent) {
         String newAddress = showInputDialog("Enter address:", address.getText());
         if (newAddress != null) {
+            selectedAddress = newAddress;
             address.setText(newAddress);
         }
     }
@@ -184,6 +195,7 @@ public class CreatePatientScreen extends Application {
         List<String> currentAllergies = Arrays.asList(allergies.getText().split(",\\s*"));
         List<String> newAllergies = showListPickerDialog("Edit allergies:", currentAllergies);
         if (newAllergies != null) {
+            selectedAllergies = newAllergies;
             allergies.setText(String.join(", ", newAllergies));
         }
     }
@@ -192,6 +204,7 @@ public class CreatePatientScreen extends Application {
         List<String> currentConditions = Arrays.asList(medicalConditions.getText().split(",\\s*"));
         List<String> newConditions = showListPickerDialog("Edit medical conditions:", currentConditions);
         if (newConditions != null) {
+            selectedMedicalConditions = newConditions;
             medicalConditions.setText(String.join(", ", newConditions));
         }
     }
@@ -200,6 +213,7 @@ public class CreatePatientScreen extends Application {
         List<String> currentMedications = Arrays.asList(medication.getText().split(",\\s*"));
         List<String> newMedications = showListPickerDialog("Edit medications:", currentMedications);
         if (newMedications != null) {
+            selectedMedications = newMedications;
             medication.setText(String.join(", ", newMedications));
         }
     }
@@ -207,6 +221,7 @@ public class CreatePatientScreen extends Application {
     public void chooseLanguage(ActionEvent actionEvent) {
         String newLanguage = showInputDialog("Enter primary language:", language.getText());
         if (newLanguage != null) {
+            selectedLanguage = newLanguage;
             language.setText(newLanguage);
         }
     }
@@ -275,8 +290,37 @@ public class CreatePatientScreen extends Application {
     }
 
     public void finalizeCreation(ActionEvent actionEvent) {
-        System.out.println("send to server");
+        if (selectedName == null || selectedEmail == null || selectedAddress == null || selectedPhoneNum == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Patient");
+            alert.setHeaderText("Name, Email, Phone Number, and Address must be provided");
+        }
+        else if (selectedLanguage == null) {
+            if (selectedMedications != null && selectedMedicalConditions != null && selectedAllergies != null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Patient");
+                alert.setHeaderText("Primary language is required");
+                return;
+            }
+            applicationState.addPatient(PatientFactory.createPatient(selectedName, selectedEmail, selectedPhoneNum, selectedAddress));
+        }
+        else if (selectedMedications == null && selectedMedicalConditions == null && selectedAllergies == null) {
+            applicationState.addPatient(PatientFactory.createPatient(selectedLanguage, selectedName, selectedEmail, selectedPhoneNum, selectedAddress));
+        }
+        else if (selectedAllergies != null && selectedMedicalConditions == null && selectedMedications == null) {
+            applicationState.addPatient(PatientFactory.createPatientWithAllergy(selectedLanguage, selectedName, selectedEmail, selectedPhoneNum, selectedAddress, selectedAllergies));
+        }
+        else if (selectedMedications != null && selectedMedicalConditions == null && selectedAllergies == null) {
+            applicationState.addPatient(PatientFactory.createPatientWithMedication(selectedLanguage, selectedName, selectedEmail, selectedPhoneNum, selectedAddress, selectedMedications));
+        }
+        else if (selectedMedicalConditions != null && selectedMedications == null && selectedAllergies == null) {
+            applicationState.addPatient(PatientFactory.createPatientWithMedicalCondition(selectedLanguage, selectedName, selectedEmail, selectedPhoneNum, selectedAddress, selectedMedicalConditions));
+        }
+        else {
+            applicationState.addPatient(PatientFactory.createPatient(selectedLanguage, selectedName, selectedEmail, selectedPhoneNum, selectedAddress, selectedAllergies, selectedMedicalConditions, selectedMedications));
+        }
+
+        DisplayUtilities.displaySuccess();
+        applicationState.saveState();
     }
-
-
 }

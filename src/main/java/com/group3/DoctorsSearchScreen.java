@@ -50,7 +50,7 @@ public class DoctorsSearchScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/doctorSearchStyle.css")).toExternalForm());
@@ -71,7 +71,7 @@ public class DoctorsSearchScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 
@@ -114,7 +114,7 @@ public class DoctorsSearchScreen extends Application {
         screen.setApplicationState(applicationState);
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/doctorsViewStyle.css")).toExternalForm());

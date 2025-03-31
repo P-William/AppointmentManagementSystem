@@ -81,17 +81,9 @@
             <HBox styleClass="settings">
                 <Label styleClass="label">First Name</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="firstName" styleClass="user-text">None</Label>
+                <Label fx:id="name" styleClass="user-text">None</Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseFirstName" styleClass="link" text="Change" />
-            </HBox>
-
-            <HBox styleClass="settings">
-                <Label styleClass="label">Last Name</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="lastName" styleClass="user-text">None</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#chooseLastName" styleClass="link" text="Change" />
+                <Hyperlink onAction="#chooseName" styleClass="link" text="Change" />
             </HBox>
 
             <HBox styleClass="settings">

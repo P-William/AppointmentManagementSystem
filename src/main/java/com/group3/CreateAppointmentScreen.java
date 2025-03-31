@@ -1,10 +1,7 @@
 package com.group3;
 
 import com.group3.factories.AppointmentFactory;
-import com.group3.objects.ApplicationState;
-import com.group3.objects.Doctor;
-import com.group3.objects.Patient;
-import com.group3.objects.Room;
+import com.group3.objects.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -103,7 +100,7 @@ public class CreateAppointmentScreen extends Application {
         BorderPane root = loader.load();
 
         // Set up the scene
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
 
         // Add CSS
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createAppointmentStyle.css")).toExternalForm());
@@ -124,7 +121,7 @@ public class CreateAppointmentScreen extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         BorderPane root = loader.load();
 
-        Scene scene = new Scene(root, 1270, 1024);
+        Scene scene = new Scene(root, 1280, 720);
         Stage stage = (Stage) calendarDropdown.getScene().getWindow();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
 
@@ -193,6 +190,7 @@ public class CreateAppointmentScreen extends Application {
     public void chooseReasonForVisit(ActionEvent actionEvent) {
         String newReasonForVisit = showInputDialog("Enter new reason for visit:", reasonForVisit.getText());
         if (newReasonForVisit != null) {
+            selectedReason = newReasonForVisit;
             reasonForVisit.setText(newReasonForVisit);
         }
     }
@@ -434,11 +432,13 @@ public class CreateAppointmentScreen extends Application {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Appointment");
             alert.setHeaderText("All fields must be valid");
-            return;
+            alert.show();
         }
         else {
             Duration dur = Duration.between(selectedStartTime, selectedEndTime);
             LocalDateTime time = selectedDate.atTime(selectedStartTime);
+
+            DisplayUtilities.displaySuccess();
 
             applicationState.addAppointment(AppointmentFactory.createAppointment(selectedPatient, selectedDoctor, selectedRoom, time, dur, selectedReason));
             applicationState.saveState();
