@@ -102,12 +102,15 @@ public class DashboardScreen extends Application {
         switchScene("createAppointment");
     }
 
-    public void createPatient(ActionEvent actionEvent) {
+    public void createPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("createPatient");
     }
 
-    public void createDoctor(ActionEvent actionEvent) {
+    public void createDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("createDoctor");
     }
 
-    public void createRoom(ActionEvent actionEvent) {
+    public void createRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("createRoom");
     }
 }
