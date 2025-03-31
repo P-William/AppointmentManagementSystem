@@ -74,7 +74,7 @@
                          translateX="4"/>
             </StackPane>
             <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
+                <VBox fx:id="doctorList" VBox.vgrow="ALWAYS" maxWidth="Infinity">
                     <HBox styleClass="table-heading" maxWidth="Infinity">
                         <Label styleClass="name-size">Full Name</Label>
                         <Label styleClass="phone-size">Phone</Label>
@@ -85,7 +85,7 @@
                         <Label styleClass="name-size">Timmy Smith</Label>
                         <Label styleClass="phone-size">(123)123-1234</Label>
                         <Label styleClass="specialties-size">speciality1, speciality2, speciality3</Label>
-                        <Button onAction="#viewDoctor">View</Button>
+                        <Button>View</Button>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
 

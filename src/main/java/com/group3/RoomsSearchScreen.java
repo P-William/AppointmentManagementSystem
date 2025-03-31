@@ -1,5 +1,9 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.PatientObjectFactory;
+import com.group3.objects.Room;
+import com.group3.objects.RoomObjectFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +21,13 @@ import java.util.Objects;
 public class RoomsSearchScreen extends Application {
     @FXML
     public TextField searchField;
+    @FXML
+    public VBox roomList;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
+
+    private ApplicationState applicationState;
+    private RoomObjectFactory roomObjectFactory;
 
     @FXML
     public void initialize() {
@@ -26,6 +35,11 @@ public class RoomsSearchScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
+
+        roomObjectFactory = new RoomObjectFactory(this);
+        roomObjectFactory.populateRooms(roomList, applicationState.getRooms());
     }
 
     @Override
@@ -89,10 +103,14 @@ public class RoomsSearchScreen extends Application {
         System.out.println("Search term: "+searchField.getText());
     }
 
-    public void viewRoom(ActionEvent actionEvent) throws IOException {
+    public void viewRoom(ActionEvent actionEvent, Room room) throws IOException {
         // Load FXML layout
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/roomsViewLayout.fxml"));
         BorderPane root = loader.load();
+
+        RoomsViewScreen screen = loader.getController();
+        screen.setRoom(room);
+        screen.setApplicationState(applicationState);
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);

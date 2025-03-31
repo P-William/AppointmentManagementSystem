@@ -1,5 +1,7 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Doctor;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.*;
@@ -34,13 +37,18 @@ public class DoctorsViewScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private Doctor doctor;
+
+    @Setter
+    private ApplicationState applicationState;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Doctors > Timmy Smith");
+
     }
 
     @Override
@@ -81,6 +89,17 @@ public class DoctorsViewScreen extends Application {
         stage.show();
     }
 
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+
+        pageTitle.setText("Doctor > " + doctor.getFirstName() + " " + doctor.getLastName());
+        firstName.setText(doctor.getFirstName());
+        lastName.setText(doctor.getLastName());
+        email.setText(doctor.getEmail());
+        phone.setText(doctor.getPhoneNumber());
+        specialities.setText(String.join(", ", doctor.getSpecialties()));
+    }
+
     public void selectDashboard(ActionEvent actionEvent) throws IOException {
         switchScene("dashboard");
     }
@@ -104,6 +123,8 @@ public class DoctorsViewScreen extends Application {
     public void changeFirstName(ActionEvent actionEvent) {
         String newFirstName = showInputDialog("Enter new first name:", firstName.getText());
         if (newFirstName != null) {
+            doctor.setFirstName(newFirstName);
+            applicationState.saveState();
             firstName.setText(newFirstName);
         }
     }
@@ -111,6 +132,8 @@ public class DoctorsViewScreen extends Application {
     public void changeLastName(ActionEvent actionEvent) {
         String newLastName = showInputDialog("Enter new last name:", lastName.getText());
         if (newLastName != null) {
+            doctor.setLastName(newLastName);
+            applicationState.saveState();
             lastName.setText(newLastName);
         }
     }
@@ -118,6 +141,8 @@ public class DoctorsViewScreen extends Application {
     public void changeEmail(ActionEvent actionEvent) {
         String newEmail = showInputDialog("Enter new email:", email.getText());
         if (newEmail != null) {
+            doctor.setEmail(newEmail);
+            applicationState.saveState();
             email.setText(newEmail);
         }
     }
@@ -125,6 +150,8 @@ public class DoctorsViewScreen extends Application {
     public void changePhone(ActionEvent actionEvent) {
         String newPhone = showInputDialog("Enter new phone number:", phone.getText());
         if (newPhone != null) {
+            doctor.setPhoneNumber(newPhone);
+            applicationState.saveState();
             phone.setText(newPhone);
         }
     }
@@ -134,6 +161,8 @@ public class DoctorsViewScreen extends Application {
         List<String> currentSpeciality = Arrays.asList(specialities.getText().split(",\\s*"));
         List<String> updatedSpeciality = showListChangeDialog("Edit specialities:", currentSpeciality);
         if (updatedSpeciality != null) {
+            doctor.setSpecialties(updatedSpeciality);
+            applicationState.saveState();
             specialities.setText(String.join(", ", updatedSpeciality));
         }
     }

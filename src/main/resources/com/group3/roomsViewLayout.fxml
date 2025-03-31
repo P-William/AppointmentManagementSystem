@@ -76,13 +76,6 @@
                 <Region HBox.hgrow="ALWAYS"/>
                 <Hyperlink onAction="#changeName" styleClass="link" text="Change" />
             </HBox>
-            <HBox styleClass="settings">
-                <Label styleClass="label">Number</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="number" styleClass="user-text">1</Label>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink onAction="#changeNumber" styleClass="link" text="Change" />
-            </HBox>
         </VBox>
     </center>
 </BorderPane>

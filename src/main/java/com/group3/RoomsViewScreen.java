@@ -1,5 +1,7 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Room;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +12,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.*;
 
 public class RoomsViewScreen extends Application {
-    @FXML
-    public Label number;
     @FXML
     public Label name;
     @FXML
@@ -26,13 +27,17 @@ public class RoomsViewScreen extends Application {
     @FXML
     private VBox calendarDropdown;
 
+    private Room room;
+    @Setter
+    private ApplicationState applicationState;
+
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Rooms > X-Ray");
+
     }
 
     @Override
@@ -73,6 +78,13 @@ public class RoomsViewScreen extends Application {
         stage.show();
     }
 
+    public void setRoom(Room room){
+        this.room = room;
+
+        pageTitle.setText("Room > " + room.getRoomName());
+        name.setText(room.getRoomName());
+    }
+
     public void selectDashboard(ActionEvent actionEvent) throws IOException {
         switchScene("dashboard");
     }
@@ -96,14 +108,9 @@ public class RoomsViewScreen extends Application {
     public void changeName(ActionEvent actionEvent) {
         String newName = showInputDialog("Enter new name:", name.getText());
         if (newName != null) {
+            room.setRoomName(newName);
+            applicationState.saveState();
             name.setText(newName);
-        }
-    }
-
-    public void changeNumber(ActionEvent actionEvent) {
-        String newNumber = showInputDialog("Enter new number:", number.getText());
-        if (newNumber != null) {
-            number.setText(newNumber);
         }
     }
 

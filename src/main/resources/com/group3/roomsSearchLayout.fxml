@@ -74,16 +74,14 @@
                          translateX="4"/>
             </StackPane>
             <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
-                <VBox VBox.vgrow="ALWAYS" maxWidth="Infinity">
+                <VBox fx:id="roomList" VBox.vgrow="ALWAYS" maxWidth="Infinity">
                     <HBox styleClass="table-heading" maxWidth="Infinity">
-                        <Label styleClass="number-size">Room Number</Label>
                         <Label styleClass="name-size">Room Name</Label>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
                     <HBox styleClass="table-entry" maxWidth="Infinity">
-                        <Label styleClass="number-size">Room Number</Label>
                         <Label styleClass="name-size">X-Ray Room</Label>
-                        <Button onAction="#viewRoom">View</Button>
+                        <Button>View</Button>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
 

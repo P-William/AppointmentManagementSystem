@@ -1,5 +1,8 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Doctor;
+import com.group3.objects.DoctorObjectFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,14 +14,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.util.Objects;
 
 public class DoctorsSearchScreen extends Application {
     @FXML
     public TextField searchField;
+    @FXML
+    public VBox doctorList;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
+
+    private DoctorObjectFactory doctorObjectFactory;
+    private ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -26,6 +35,13 @@ public class DoctorsSearchScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
+
+        applicationState.addDoctor(Doctor.create("bib", "bob", "123", "456"));
+
+        doctorObjectFactory = new DoctorObjectFactory(this);
+        doctorObjectFactory.populateDoctors(doctorList, applicationState.getDoctors());
     }
 
     @Override
@@ -90,10 +106,14 @@ public class DoctorsSearchScreen extends Application {
         System.out.println("Search term: "+searchField.getText());
     }
 
-    public void viewDoctor(ActionEvent actionEvent) throws IOException {
+    public void viewDoctor(ActionEvent actionEvent, Doctor doctor) throws IOException {
         // Load FXML layout
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/doctorsViewLayout.fxml"));
         BorderPane root = loader.load();
+
+        DoctorsViewScreen screen = loader.getController();
+        screen.setDoctor(doctor);
+        screen.setApplicationState(applicationState);
 
         // Set up the scene
         Scene scene = new Scene(root, 1270, 1024);
