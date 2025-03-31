@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.shape.SVGPath?>
-
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.group3.DashboardScreen"
             stylesheets="@dashboardStyle.css" styleClass="main">
@@ -80,17 +70,17 @@
                 <VBox styleClass="stat-card">
                     <Label styleClass="stat-card-title">Patients</Label>
                     <Separator styleClass="patients-seperator" />
-                    <Label styleClass="stat-card-value">123</Label>
+                    <Label fx:id="patientCount" styleClass="stat-card-value">123</Label>
                 </VBox>
                 <VBox styleClass="stat-card">
                     <Label styleClass="stat-card-title">Doctors</Label>
                     <Separator styleClass="doctors-seperator" />
-                    <Label styleClass="stat-card-value">12</Label>
+                    <Label fx:id="doctorCount" styleClass="stat-card-value">12</Label>
                 </VBox>
                 <VBox styleClass="stat-card">
                     <Label styleClass="stat-card-title">Rooms</Label>
                     <Separator styleClass="rooms-seperator" />
-                    <Label styleClass="stat-card-value">5</Label>
+                    <Label fx:id="roomCount" styleClass="stat-card-value">5</Label>
                 </VBox>
             </HBox>
             <Label styleClass="page-subheading">Today's appointments (March 22, 2025)</Label>
@@ -101,13 +91,6 @@
                         <Label styleClass="patient-size">Patient</Label>
                         <Label styleClass="doctor-size">Doctor</Label>
                         <Label styleClass="room-size">Room Number</Label>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-                    <HBox styleClass="table-entry" maxWidth="Infinity">
-                        <Label styleClass="date-size">Mar 22, 2025 @ 13:00-13:30</Label>
-                        <Label styleClass="patient-size">Brooke Cronin</Label>
-                        <Label styleClass="doctor-size">Timmy Smith</Label>
-                        <Label styleClass="room-size">1</Label>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
                 </VBox>

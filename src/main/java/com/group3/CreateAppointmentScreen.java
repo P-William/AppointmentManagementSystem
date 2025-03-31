@@ -22,25 +22,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
-public class CreateAppointmentScreen extends Application {
-    @FXML
-    public Label email;
-    @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
-    @FXML
-    public Label phone;
-    @FXML
-    public Label address;
-    @FXML
-    public Label allergies;
-    @FXML
-    public Label medicalConditions;
-    @FXML
-    public Label medication;
-    @FXML
-    public Label language;
+public class CreateAppointmentScreen extends BaseController {
     @FXML
     public Label pageTitle;
     @FXML
@@ -90,80 +72,6 @@ public class CreateAppointmentScreen extends Application {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/createAppointmentLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1280, 720);
-
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createAppointmentStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        primaryStage.setTitle("Doctor Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    private void switchScene(String baseName) throws IOException {
-        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        BorderPane root = loader.load();
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
-        switchScene("dashboard");
-    }
-
-    public void selectCalendar(ActionEvent actionEvent) throws IOException {
-        switchScene("calendar");
-    }
-
-    public void selectPatients(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsSearch");
-    }
-
-    public void selectDoctors(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsSearch");
-    }
-
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsSearch");
-    }
-
-    public void createAppointment(ActionEvent actionEvent) throws IOException {
-        switchScene("createAppointment");
-    }
-
-    public void createPatient(ActionEvent actionEvent) throws IOException {
-        switchScene("createPatient");
-    }
-
-    public void createDoctor(ActionEvent actionEvent) throws IOException {
-        switchScene("createDoctor");
-    }
-
-    public void createRoom(ActionEvent actionEvent) throws IOException {
-        switchScene("createRoom");
     }
 
     public void choosePatient(ActionEvent actionEvent) {
@@ -227,29 +135,6 @@ public class CreateAppointmentScreen extends Application {
             selectedEndTime = newTime;
             endTime.setText(newTime.toString());
         }
-    }
-
-    private String showTextPickerDialog(String message, String defaultText, List<String> textOptions) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Edit Appointment Info");
-        dialog.setHeaderText(message);
-
-        ComboBox<String> comboBox = new ComboBox<>(FXCollections.observableArrayList(textOptions));
-        comboBox.setEditable(false);
-        comboBox.setValue(defaultText);
-
-        dialog.getDialogPane().setContent(comboBox);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        dialog.setResultConverter(button -> {
-            if (button == ButtonType.OK) {
-                return comboBox.getValue();
-            }
-            return null;
-        });
-
-        Optional<String> result = dialog.showAndWait();
-        return result.orElse(null);
     }
 
     private Patient showPatientPickerDialog(List<Patient> patients) {
@@ -435,12 +320,12 @@ public class CreateAppointmentScreen extends Application {
             alert.show();
         }
         else {
-            Duration dur = Duration.between(selectedStartTime, selectedEndTime);
+            duration = Duration.between(selectedStartTime, selectedEndTime);
             LocalDateTime time = selectedDate.atTime(selectedStartTime);
 
             DisplayUtilities.displaySuccess();
 
-            applicationState.addAppointment(AppointmentFactory.createAppointment(selectedPatient, selectedDoctor, selectedRoom, time, dur, selectedReason));
+            applicationState.addAppointment(AppointmentFactory.createAppointment(selectedPatient, selectedDoctor, selectedRoom, time, duration, selectedReason));
             applicationState.saveState();
         }
     }

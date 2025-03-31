@@ -27,6 +27,11 @@ public class AppointmentObjectFactory {
         Label doctor = new Label(appointment.getDoctor().getName());
         Label room = new Label(appointment.getRoomBooked().getRoomName());
 
+        dateTime.getStyleClass().add("date-size");
+        patient.getStyleClass().add("patient-size");
+        doctor.getStyleClass().add("doctor-size");
+        doctor.getStyleClass().add("room-size");
+
         Button view = new Button("View");
         view.setOnAction(e -> {
             try {

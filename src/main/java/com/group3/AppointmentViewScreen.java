@@ -19,25 +19,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class AppointmentViewScreen extends Application {
-    @FXML
-    public Label email;
-    @FXML
-    public Label lastName;
-    @FXML
-    public Label firstName;
-    @FXML
-    public Label phone;
-    @FXML
-    public Label address;
-    @FXML
-    public Label allergies;
-    @FXML
-    public Label medicalConditions;
-    @FXML
-    public Label medication;
-    @FXML
-    public Label language;
+public class AppointmentViewScreen extends BaseController{
     @FXML
     public Label pageTitle;
     @FXML
@@ -73,44 +55,6 @@ public class AppointmentViewScreen extends Application {
         pageTitle.setText("Appointment > Brooke Cronin, Timmy Smith, Room 1 @ 13:00-13:30");
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/appointmentViewLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1280, 720);
-
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/appointmentViewStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        primaryStage.setTitle("Doctor Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    private void switchScene(String baseName) throws IOException {
-        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        BorderPane root = loader.load();
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
 
@@ -121,26 +65,6 @@ public class AppointmentViewScreen extends Application {
         date.setText(appointment.getAppointmentAt().toLocalDate().toString());
         startTime.setText(appointment.getAppointmentAt().toLocalTime().toString());
         endTime.setText(appointment.getAppointmentAt().toLocalTime().plus(appointment.getDuration()).toString());
-    }
-
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
-        switchScene("dashboard");
-    }
-
-    public void selectCalendar(ActionEvent actionEvent) throws IOException {
-        switchScene("calendar");
-    }
-
-    public void selectPatients(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsSearch");
-    }
-
-    public void selectDoctors(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsSearch");
-    }
-
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsSearch");
     }
 
     public void markPresent(ActionEvent actionEvent) {

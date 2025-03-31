@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 
-public class CalendarScreen extends Application {
+public class CalendarScreen extends BaseController {
     @FXML public GridPane calendarGrid;
     @FXML public Label monthYearLabel;
     @FXML public TextField searchField;
@@ -107,7 +107,7 @@ public class CalendarScreen extends Application {
     }
 
     private void viewAppointment() throws IOException {
-        switchScene("appointmentView");
+        //switchScene("appointmentView");
     }
 
     @FXML
@@ -134,28 +134,6 @@ public class CalendarScreen extends Application {
         populateCalendar(displayYearMonth);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/calendarLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1280, 720);
-
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/calendarStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        primaryStage.setTitle("Doctor Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     public void searchEntered(ActionEvent actionEvent) {
         System.out.println("Search term: " + searchField.getText());
 
@@ -166,41 +144,6 @@ public class CalendarScreen extends Application {
             searchResultDate = null;
             populateCalendar(displayYearMonth);
         }
-    }
-    private void switchScene(String baseName) throws IOException {
-        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        BorderPane root = loader.load();
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
-        switchScene("dashboard");
-    }
-
-    public void selectCalendar(ActionEvent actionEvent) throws IOException {
-        switchScene("calendar");
-    }
-
-    public void selectPatients(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsSearch");
-    }
-
-    public void selectDoctors(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsSearch");
-    }
-
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsSearch");
     }
 
     @FXML

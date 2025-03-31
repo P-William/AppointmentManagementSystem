@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.shape.SVGPath?>
-
-<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.group3.PatientsSearchScreen"
             stylesheets="@patientsSearchStyle.css" styleClass="main">
@@ -80,14 +69,6 @@
                         <Label styleClass="email-size">Email</Label>
                         <Label styleClass="phone-size">Phone</Label>
                         <Label styleClass="address-size">Address</Label>
-                    </HBox>
-                    <Separator styleClass="table-seperator"/>
-                    <HBox styleClass="table-entry" maxWidth="Infinity">
-                        <Label styleClass="name-size">Brooke Cronin</Label>
-                        <Label styleClass="email-size">brookecronin@gmail.com</Label>
-                        <Label styleClass="phone-size">(123)123-1234</Label>
-                        <Label styleClass="address-size">108 University Ave E, Waterloo, ON, Canada</Label>
-                        <Button >View</Button>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
 

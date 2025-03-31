@@ -17,7 +17,7 @@ import lombok.Setter;
 import java.io.IOException;
 import java.util.*;
 
-public class DoctorsViewScreen extends Application {
+public class DoctorsViewScreen extends BaseController {
     @FXML
     public Label email;
     @FXML
@@ -49,44 +49,6 @@ public class DoctorsViewScreen extends Application {
 
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/doctorsViewLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1280, 720);
-
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/doctorsViewStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        primaryStage.setTitle("Doctor Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    private void switchScene(String baseName) throws IOException {
-        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        BorderPane root = loader.load();
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
 
@@ -95,26 +57,6 @@ public class DoctorsViewScreen extends Application {
         email.setText(doctor.getEmail());
         phone.setText(doctor.getPhoneNumber());
         specialities.setText(String.join(", ", doctor.getSpecialties()));
-    }
-
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
-        switchScene("dashboard");
-    }
-
-    public void selectCalendar(ActionEvent actionEvent) throws IOException {
-        switchScene("calendar");
-    }
-
-    public void selectPatients(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsSearch");
-    }
-
-    public void selectDoctors(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsSearch");
-    }
-
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsSearch");
     }
 
     public void changeName(ActionEvent actionEvent) {
@@ -143,7 +85,6 @@ public class DoctorsViewScreen extends Application {
             phone.setText(newPhone);
         }
     }
-
 
     public void changeSpeciality(ActionEvent actionEvent) {
         List<String> currentSpeciality = Arrays.asList(specialities.getText().split(",\\s*"));

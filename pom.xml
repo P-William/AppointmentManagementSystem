@@ -104,14 +104,14 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                         <configuration>
-                            <mainClass>com.group3.DashboardScreen</mainClass>
+                            <mainClass>com.group3.App</mainClass>
                         </configuration>
                 <executions>
                     <execution>
                         <!-- Default configuration for running -->
                         <id>run</id>
                         <configuration>
-                            <mainClass>com.group3.DashboardScreen</mainClass>
+                            <mainClass>com.group3.App</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -121,7 +121,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
                             </options>
-                            <mainClass>com.group3.DashboardScreen</mainClass>
+                            <mainClass>com.group3.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>

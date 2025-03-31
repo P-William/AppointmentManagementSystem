@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 
-public class CreateDoctorScreen extends Application {
+public class CreateDoctorScreen extends BaseController {
     @FXML
     public Label email;
     @FXML
@@ -25,33 +25,7 @@ public class CreateDoctorScreen extends Application {
     @FXML
     public Label phone;
     @FXML
-    public Label address;
-    @FXML
-    public Label allergies;
-    @FXML
-    public Label medicalConditions;
-    @FXML
-    public Label medication;
-    @FXML
-    public Label language;
-    @FXML
     public Label pageTitle;
-    @FXML
-    public CheckBox checkIn;
-    @FXML
-    public Label patient;
-    @FXML
-    public Label doctor;
-    @FXML
-    public Label room;
-    @FXML
-    public Label date;
-    @FXML
-    public Label startTime;
-    @FXML
-    public Label endTime;
-    @FXML
-    public Label reasonForVisit;
     @FXML
     public Label specialties;
     @FXML private ToggleButton createToggle;
@@ -81,80 +55,6 @@ public class CreateDoctorScreen extends Application {
         });
 
         applicationState = ApplicationState.loadState();
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML layout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/createDoctorLayout.fxml"));
-        BorderPane root = loader.load();
-
-        // Set up the scene
-        Scene scene = new Scene(root, 1280, 720);
-
-        // Add CSS
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/createDoctorStyle.css")).toExternalForm());
-//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/accord/aCCORD-logo.png"))));
-        // Configure the stage
-        primaryStage.setTitle("Doctor Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    private void switchScene(String baseName) throws IOException {
-        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        BorderPane root = loader.load();
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
-        switchScene("dashboard");
-    }
-
-    public void selectCalendar(ActionEvent actionEvent) throws IOException {
-        switchScene("calendar");
-    }
-
-    public void selectPatients(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsSearch");
-    }
-
-    public void selectDoctors(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsSearch");
-    }
-
-    public void selectRooms(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsSearch");
-    }
-
-    public void createAppointment(ActionEvent actionEvent) throws IOException {
-        switchScene("createAppointment");
-    }
-
-    public void createPatient(ActionEvent actionEvent) throws IOException {
-        switchScene("createPatient");
-    }
-
-    public void createDoctor(ActionEvent actionEvent) throws IOException {
-        switchScene("createDoctor");
-    }
-
-    public void createRoom(ActionEvent actionEvent) throws IOException {
-        switchScene("createRoom");
     }
 
     public void chooseName(ActionEvent actionEvent) {
