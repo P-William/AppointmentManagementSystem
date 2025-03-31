@@ -12,8 +12,7 @@ public final class PatientFactory {
 
     public static Patient createPatient(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address
@@ -21,8 +20,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)
@@ -30,8 +28,7 @@ public final class PatientFactory {
     }
 
     public static Patient createPatient(
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address
@@ -39,8 +36,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage("English")
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)
@@ -49,8 +45,7 @@ public final class PatientFactory {
 
     public static Patient createPatient(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address,
@@ -61,8 +56,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)
@@ -74,8 +68,7 @@ public final class PatientFactory {
 
     public static Patient createPatientWithAllergy(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address,
@@ -84,8 +77,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)
@@ -95,8 +87,7 @@ public final class PatientFactory {
 
     public static Patient createPatientWithMedicalCondition(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address,
@@ -105,8 +96,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)
@@ -116,8 +106,7 @@ public final class PatientFactory {
 
     public static Patient createPatientWithMedication(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address,
@@ -126,8 +115,7 @@ public final class PatientFactory {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)

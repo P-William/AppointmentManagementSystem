@@ -19,8 +19,7 @@ public class Doctor {
     @Setter(AccessLevel.NONE)
     private UUID doctorId;
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private String phoneNumber;
 
