@@ -20,8 +20,7 @@ public class Patient {
     private UUID patientId;
     private String primaryLanguage;
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private String phoneNumber;
     private String address;
@@ -39,8 +38,7 @@ public class Patient {
 
     public static Patient create(
         String primaryLanguage,
-        String firstName,
-        String lastName,
+        String name,
         String email,
         String phoneNumber,
         String address
@@ -48,8 +46,7 @@ public class Patient {
         return Patient.builder()
             .patientId(UUID.randomUUID())
             .primaryLanguage(primaryLanguage)
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .address(address)

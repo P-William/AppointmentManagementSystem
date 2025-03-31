@@ -10,21 +10,19 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.NONE)
 public final class DoctorFactory {
 
-    public static Doctor createDoctor(String firstName, String lastName, String email, String phoneNumber) {
+    public static Doctor createDoctor(String name, String email, String phoneNumber) {
         return Doctor.builder()
             .doctorId(UUID.randomUUID())
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .build();
     }
 
-    public static Doctor createDoctor(String firstName, String lastName, String email, String phoneNumber, List<String> specialties) {
+    public static Doctor createDoctor(String name, String email, String phoneNumber, List<String> specialties) {
         return Doctor.builder()
             .doctorId(UUID.randomUUID())
-            .firstName(firstName)
-            .lastName(lastName)
+            .name(name)
             .email(email)
             .phoneNumber(phoneNumber)
             .specialties(specialties)
