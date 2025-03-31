@@ -8,15 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-public class AppointmentViewScreen extends Application {
+public class CreateAppointmentScreen extends Application {
     @FXML
     public Label email;
     @FXML
@@ -52,8 +54,6 @@ public class AppointmentViewScreen extends Application {
     @FXML
     public Label endTime;
     @FXML
-    public Label reasonForVisit;
-    @FXML
     private ToggleButton calendarToggle;
     @FXML
     private VBox calendarDropdown;
@@ -64,7 +64,7 @@ public class AppointmentViewScreen extends Application {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Create Appointment");
+        pageTitle.setText("Appointment > Brooke Cronin, Timmy Smith, Room 1 @ 13:00-13:30");
     }
 
     @Override
@@ -125,38 +125,22 @@ switchScene("doctorsSearch");
         switchScene("roomsSearch");
     }
 
-    public void choosePatient(ActionEvent actionEvent) {
-        String currentPatient = patient.getText();
-        String newPatient = showTextPickerDialog("Select patient:", currentPatient, new ArrayList<>(Arrays.asList("Brooke Cronin", "Connor Miller", "Pen Cui", "William Paetz")));
-        if (newPatient != null) {
-            patient.setText(newPatient);
-        }
+    public void markPresent(ActionEvent actionEvent) {
     }
 
-    public void chooseDoctor(ActionEvent actionEvent) {
-        String currentDoctor = doctor.getText();
-        String newDoctor = showTextPickerDialog("Select doctor:", currentDoctor, new ArrayList<>(Arrays.asList("Timmy Smith", "Marcus Foster", "Natalie Crawford", "Felicity Morgan", "Malcolm Pierce", "Jasper Hammond")));
-        if (newDoctor != null) {
-            doctor.setText(newDoctor);
-        }
+    public void viewPatient(ActionEvent actionEvent) throws IOException {
+        switchScene("patientsView");
     }
 
-    public void chooseRoom(ActionEvent actionEvent) {
-        String currentRoom = room.getText();
-        String newRoom = showTextPickerDialog("Select room:", currentRoom, new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5")));
-        if (newRoom != null) {
-            room.setText(newRoom);
-        }
+    public void viewDoctor(ActionEvent actionEvent) throws IOException {
+        switchScene("doctorsView");
     }
 
-    public void chooseReasonForVisit(ActionEvent actionEvent) {
-        String newReasonForVisit = showInputDialog("Enter new reason for visit:", reasonForVisit.getText());
-        if (newReasonForVisit != null) {
-            reasonForVisit.setText(newReasonForVisit);
-        }
+    public void viewRoom(ActionEvent actionEvent) throws IOException {
+        switchScene("roomsView");
     }
 
-    public void chooseDate(ActionEvent actionEvent) {
+    public void changeDate(ActionEvent actionEvent) {
         LocalDate currentDate;
 
         try {
@@ -172,7 +156,7 @@ switchScene("doctorsSearch");
     }
 
 
-    public void chooseStartTime(ActionEvent actionEvent) {
+    public void changeStartTime(ActionEvent actionEvent) {
         String currentStart = startTime.getText();
         String newTime = showTimePickerDialog("Select start time:", currentStart);
         if (newTime != null) {
@@ -180,46 +164,12 @@ switchScene("doctorsSearch");
         }
     }
 
-    public void chooseEndTime(ActionEvent actionEvent) {
+    public void changeEndTime(ActionEvent actionEvent) {
         String currentEnd = endTime.getText();
         String newTime = showTimePickerDialog("Select end time:", currentEnd);
         if (newTime != null) {
             endTime.setText(newTime);
         }
-    }
-
-    private String showTextPickerDialog(String message, String defaultText, List<String> textOptions) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Edit Appointment Info");
-        dialog.setHeaderText(message);
-
-        ComboBox<String> comboBox = new ComboBox<>(FXCollections.observableArrayList(textOptions));
-        comboBox.setEditable(false);
-        comboBox.setValue(defaultText);
-
-        dialog.getDialogPane().setContent(comboBox);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        dialog.setResultConverter(button -> {
-            if (button == ButtonType.OK) {
-                return comboBox.getValue();
-            }
-            return null;
-        });
-
-        Optional<String> result = dialog.showAndWait();
-        return result.orElse(null);
-    }
-
-
-    private String showInputDialog(String message, String defaultValue) {
-        TextInputDialog dialog = new TextInputDialog(defaultValue);
-        dialog.setTitle("Edit Appointment Info");
-        dialog.setHeaderText(null);
-        dialog.setContentText(message);
-
-        Optional<String> result = dialog.showAndWait();
-        return result.orElse(null);
     }
 
     private LocalDate showDatePickerDialog(String message, LocalDate defaultDate) {
@@ -274,8 +224,4 @@ switchScene("doctorsSearch");
         return result.orElse(null);
     }
 
-
-    public void finalizeCreation(ActionEvent actionEvent) {
-        System.out.println("send to server");
-    }
 }
