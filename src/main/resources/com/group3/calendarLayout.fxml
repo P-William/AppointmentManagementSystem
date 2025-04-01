@@ -72,13 +72,13 @@
                          translateX="4"/>
             </StackPane>
             <HBox spacing="10" alignment="CENTER">
-                <Button text="Today" onAction="#goToToday"/>
+                <Button styleClass="btn-default" text="Today" onAction="#goToToday"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="&lt;&lt;" onAction="#goToPreviousYear"/>
-                <Button text="&lt;" onAction="#goToPreviousMonth"/>
+                <Button styleClass="btn-default" text="&lt;&lt;" onAction="#goToPreviousYear"/>
+                <Button styleClass="btn-default" text="&lt;" onAction="#goToPreviousMonth"/>
                 <Label fx:id="monthYearLabel" styleClass="page-subheading"/>
-                <Button text="&gt;" onAction="#goToNextMonth"/>
-                <Button text="&gt;&gt;" onAction="#goToNextYear"/>
+                <Button styleClass="btn-default" text="&gt;" onAction="#goToNextMonth"/>
+                <Button styleClass="btn-default" text="&gt;&gt;" onAction="#goToNextYear"/>
                 <Region HBox.hgrow="ALWAYS"/>
             </HBox>
 

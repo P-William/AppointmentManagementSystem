@@ -35,6 +35,7 @@ public class PatientObjectFactory {
 
         Button view = new Button();
         view.textProperty().set("View");
+        view.getStyleClass().add("btn-default");
         view.setOnAction(e -> {
             try {
                 patientsSearchScreen.viewPatient(e, patient);

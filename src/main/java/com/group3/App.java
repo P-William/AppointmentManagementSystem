@@ -15,9 +15,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboardLayout"), 1280, 720);
+        scene = new Scene(loadFXML("dashboardLayout"), 1350, 1100);
         scene.getStylesheets().add(App.class.getResource("dashboardStyle.css").toExternalForm());
+        stage.setTitle("Doctor Tracker");
         stage.setScene(scene);
+
         stage.show();
     }
 

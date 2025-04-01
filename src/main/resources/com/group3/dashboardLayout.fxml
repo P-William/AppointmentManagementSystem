@@ -83,14 +83,14 @@
                     <Label fx:id="roomCount" styleClass="stat-card-value">5</Label>
                 </VBox>
             </HBox>
-            <Label styleClass="page-subheading">Today's appointments (March 22, 2025)</Label>
+            <Label styleClass="page-subheading">Upcoming appointments</Label>
             <ScrollPane VBox.vgrow="ALWAYS" maxWidth="Infinity">
                 <VBox fx:id="appointmentList" VBox.vgrow="ALWAYS" maxWidth="Infinity">
                     <HBox styleClass="table-heading" maxWidth="Infinity">
                         <Label styleClass="date-size">Date and Time</Label>
                         <Label styleClass="patient-size">Patient</Label>
                         <Label styleClass="doctor-size">Doctor</Label>
-                        <Label styleClass="room-size">Room Number</Label>
+                        <Label styleClass="room-size">Room Name</Label>
                     </HBox>
                     <Separator styleClass="table-seperator"/>
                 </VBox>

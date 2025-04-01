@@ -128,7 +128,7 @@
                 <Hyperlink onAction="#chooseLanguage" styleClass="link" text="Change" />
             </HBox>
 
-            <Button styleClass="btn-create-thing" onAction="#finalizeCreation">Create</Button>
+            <Button styleClass="btn-default" onAction="#finalizeCreation">Create</Button>
         </VBox>
     </center>
 </BorderPane>

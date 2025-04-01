@@ -163,7 +163,7 @@
         -fx-font-weight: bold;
     }
 
-    .btn-create-thing {
+    .btn-default {
     -fx-pref-height: 24px;
             -fx-background-color: -neutral-50;
             -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 4, 4);

@@ -64,7 +64,7 @@
     <center>
         <VBox styleClass="page">
             <Label fx:id="pageTitle" styleClass="page-title">Doctors > Timmy Smith</Label>
-            <Button onAction="#delete">Delete</Button>
+            <Button styleClass="btn-default" onAction="#delete">Delete</Button>
             <HBox styleClass="settings">
                 <Label styleClass="label">First Name</Label>
                 <Region HBox.hgrow="ALWAYS"/>

@@ -30,6 +30,7 @@ public class DoctorObjectFactory {
         specialties.getStyleClass().add("specialties-size");
 
         Button view = new Button("View");
+        view.getStyleClass().add("btn-default");
         view.setOnAction(e -> {
             try {
                 doctorsSearchScreen.viewDoctor(e, doctor);

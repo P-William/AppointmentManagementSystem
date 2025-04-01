@@ -25,6 +25,7 @@ public class RoomObjectFactory {
         name.getStyleClass().add("name-size");
 
         Button view = new Button("View");
+        view.getStyleClass().add("btn-default");
         view.setOnAction(e -> {
             try {
                 roomsSearchScreen.viewRoom(e, room);

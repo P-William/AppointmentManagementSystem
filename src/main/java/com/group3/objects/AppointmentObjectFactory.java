@@ -30,9 +30,10 @@ public class AppointmentObjectFactory {
         dateTime.getStyleClass().add("date-size");
         patient.getStyleClass().add("patient-size");
         doctor.getStyleClass().add("doctor-size");
-        doctor.getStyleClass().add("room-size");
+        room.getStyleClass().add("room-size");
 
         Button view = new Button("View");
+        view.getStyleClass().add("btn-default");
         view.setOnAction(e -> {
             try {
                 dashboardScreen.viewAppointment(e, appointment);
