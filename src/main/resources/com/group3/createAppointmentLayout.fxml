@@ -113,7 +113,7 @@
                 <Region HBox.hgrow="ALWAYS"/>
                 <Hyperlink onAction="#chooseEndTime" styleClass="link" text="Choose" />
             </HBox>
-            <Button onAction="#finalizeCreation">Create</Button>
+            <Button styleClass="btn-create-thing" onAction="#finalizeCreation">Create</Button>
         </VBox>
     </center>
 </BorderPane>

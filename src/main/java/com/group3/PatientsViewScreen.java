@@ -20,6 +20,8 @@ import java.util.*;
 
 //@RequiredArgsConstructor
 public class PatientsViewScreen extends BaseController {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public Label email;
     @FXML
@@ -54,6 +56,11 @@ public class PatientsViewScreen extends BaseController {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
 
     }
 

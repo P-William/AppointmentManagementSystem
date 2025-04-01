@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class RoomsSearchScreen extends BaseController {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public TextField searchField;
     @FXML
@@ -36,6 +38,11 @@ public class RoomsSearchScreen extends BaseController {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
 
         applicationState = ApplicationState.loadState();
 

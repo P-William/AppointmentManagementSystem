@@ -73,7 +73,7 @@
                 <Hyperlink onAction="#chooseRoomName" styleClass="link" text="Change" />
             </HBox>
 
-            <Button onAction="#finalizeCreation" text="Create"/>
+            <Button styleClass="btn-create-thing" onAction="#finalizeCreation">Create</Button>
         </VBox>
 
     </center>

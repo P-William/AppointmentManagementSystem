@@ -41,6 +41,11 @@ public class CalendarScreen extends BaseController {
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
         populateCalendar(displayYearMonth);
     }
     private void populateCalendar(YearMonth yearMonth) {

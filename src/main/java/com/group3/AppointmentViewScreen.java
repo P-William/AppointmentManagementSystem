@@ -53,6 +53,11 @@ public class AppointmentViewScreen extends BaseController{
             calendarDropdown.setManaged(newVal);
         });
         pageTitle.setText("Appointment > Brooke Cronin, Timmy Smith, Room 1 @ 13:00-13:30");
+        createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            createDropdown.setVisible(newVal);
+            createDropdown.setManaged(newVal);
+        });
+
     }
 
     public void setAppointment(Appointment appointment) {
