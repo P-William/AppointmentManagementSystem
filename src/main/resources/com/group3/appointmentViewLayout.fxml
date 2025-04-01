@@ -64,6 +64,7 @@
     <center>
         <VBox styleClass="page">
             <Label fx:id="pageTitle" styleClass="page-title">Appointment</Label>
+            <Button onAction="#delete">Delete</Button>
             <HBox styleClass="settings">
                 <Label styleClass="label">Check-In</Label>
                 <Region HBox.hgrow="ALWAYS"/>

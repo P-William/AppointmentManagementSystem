@@ -43,7 +43,7 @@ public class AppointmentObjectFactory {
 
         HBox hBox = new HBox();
         hBox.getStyleClass().add("table-entry");
-        hBox.getChildren().addAll(dateTime, patient, doctor, room);
+        hBox.getChildren().addAll(dateTime, patient, doctor, room, view);
 
         return hBox;
     }

@@ -29,7 +29,7 @@ public class BaseController {
         App.setRoot(baseName);
     }
 
-    public void selectDashboard(ActionEvent actionEvent) throws IOException {
+    public void selectDashboard() throws IOException {
         System.out.println("Going to dashboard");
         switchScene("dashboardLayout");
     }

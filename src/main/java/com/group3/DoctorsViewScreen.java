@@ -56,6 +56,12 @@ public class DoctorsViewScreen extends BaseController {
 
     }
 
+    public void delete() throws IOException {
+        applicationState.removeDoctor(doctor);
+        applicationState.saveState();
+        selectDashboard();
+    }
+
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
 

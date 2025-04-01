@@ -65,20 +65,7 @@ public class DashboardScreen extends BaseController{
     }
 
     public void viewAppointment(ActionEvent actionEvent, Appointment appointment) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/group3/appointmentViewLayout.fxml"));
-        BorderPane root = loader.load();
-
-        AppointmentViewScreen appointmentViewScreen = loader.getController();
-        appointmentViewScreen.setAppointment(appointment);
-        appointmentViewScreen.setApplicationState(applicationState);
-
-        Scene scene = new Scene(root, 1280, 720);
-        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/group3/appointmentViewStyle.css")).toExternalForm());
-
-        stage.setTitle("Doctor Tracker");
-        stage.setScene(scene);
-        stage.show();
+        App.loadAppointmentView(appointment, applicationState);
     }
 
 }

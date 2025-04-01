@@ -1,5 +1,7 @@
 package com.group3;
 
+import com.group3.objects.ApplicationState;
+import com.group3.objects.Appointment;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,13 +21,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.TextStyle;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 
 public class CalendarScreen extends BaseController {
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML public GridPane calendarGrid;
     @FXML public Label monthYearLabel;
     @FXML public TextField searchField;
@@ -34,6 +41,7 @@ public class CalendarScreen extends BaseController {
     private YearMonth displayYearMonth = YearMonth.now();
     private LocalDate searchResultDate = null;
 
+    ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -45,6 +53,8 @@ public class CalendarScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
+
+        applicationState = ApplicationState.loadState();
 
         populateCalendar(displayYearMonth);
     }
@@ -108,6 +118,19 @@ public class CalendarScreen extends BaseController {
                 calendarGrid.add(dayCell, col, row + rowStart);
                 calendarDate = calendarDate.plusDays(1);
             }
+        }
+    }
+
+    private void addAppointments(VBox vBox, LocalDate date) {
+        List<Appointment> matchingAppointments = new java.util.ArrayList<>(applicationState.getAppointments()
+                .stream()
+                .filter(appointment -> appointment.getAppointmentAt().toLocalDate().equals(date))
+                .toList());
+
+        matchingAppointments.sort(Comparator.comparing(Appointment::getAppointmentAt));
+
+        for (Appointment appointment : matchingAppointments) {
+            Button button = new Button(appointment.getPatient().getName() + "\n" + appointment.getDoctor().getName() + "\n" + appointment.getRoomBooked().getRoomName() + "\n" + appointment.getAppointmentAt().toString());
         }
     }
 

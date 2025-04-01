@@ -48,6 +48,13 @@ public class RoomsViewScreen extends BaseController {
 
     }
 
+    public void delete() throws IOException {
+        applicationState.removeRoom(room);
+        applicationState.saveState();
+        selectDashboard();
+    }
+
+
     public void setRoom(Room room){
         this.room = room;
 

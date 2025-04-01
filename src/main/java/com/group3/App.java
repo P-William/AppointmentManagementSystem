@@ -1,9 +1,6 @@
 package com.group3;
 
-import com.group3.objects.ApplicationState;
-import com.group3.objects.Doctor;
-import com.group3.objects.Patient;
-import com.group3.objects.Room;
+import com.group3.objects.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,6 +53,17 @@ public class App extends Application {
 
         RoomsViewScreen screen = loader.getController();
         screen.setRoom(room);
+        screen.setApplicationState(applicationState);
+
+        scene.setRoot(root);
+    }
+
+    static void loadAppointmentView(Appointment appointment, ApplicationState applicationState) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/group3/appointmentViewLayout.fxml"));
+        BorderPane root = loader.load();
+
+        AppointmentViewScreen screen = loader.getController();
+        screen.setAppointment(appointment);
         screen.setApplicationState(applicationState);
 
         scene.setRoot(root);

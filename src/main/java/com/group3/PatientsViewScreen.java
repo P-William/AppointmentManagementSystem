@@ -64,6 +64,12 @@ public class PatientsViewScreen extends BaseController {
 
     }
 
+    public void delete() throws IOException {
+        applicationState.removePatient(patient);
+        applicationState.saveState();
+        selectDashboard();
+    }
+
     public void setPatient(Patient patient) {
         this.patient = patient;
         pageTitle.setText("Patients > " + patient.getName());

@@ -43,10 +43,7 @@ public class RoomsSearchScreen extends BaseController {
             createDropdown.setManaged(newVal);
         });
 
-
         applicationState = ApplicationState.loadState();
-
-        applicationState.addRoom(RoomFactory.createRoom("Surgery"));
 
         roomObjectFactory = new RoomObjectFactory(this);
         roomObjectFactory.populateRooms(roomList, applicationState.getRooms());

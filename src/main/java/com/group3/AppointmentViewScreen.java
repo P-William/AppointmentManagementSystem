@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AppointmentViewScreen extends BaseController{
+    @FXML private ToggleButton createToggle;
+    @FXML private VBox createDropdown;
     @FXML
     public Label pageTitle;
     @FXML
@@ -58,6 +60,12 @@ public class AppointmentViewScreen extends BaseController{
             createDropdown.setManaged(newVal);
         });
 
+    }
+
+    public void delete() throws IOException {
+        applicationState.removeAppointment(appointment);
+        applicationState.saveState();
+        selectDashboard();
     }
 
     public void setAppointment(Appointment appointment) {
