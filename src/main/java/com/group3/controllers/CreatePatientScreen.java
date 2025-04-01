@@ -1,21 +1,17 @@
-package com.group3;
+package com.group3.controllers;
 
 import com.group3.factories.PatientFactory;
-import com.group3.objects.ApplicationState;
 import com.group3.objects.DisplayUtilities;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class CreatePatientScreen extends BaseController {
     @FXML
@@ -43,8 +39,6 @@ public class CreatePatientScreen extends BaseController {
     @FXML
     private VBox calendarDropdown;
 
-    private ApplicationState applicationState;
-
     private String selectedName;
     private String selectedEmail;
     private String selectedPhoneNum;
@@ -65,8 +59,6 @@ public class CreatePatientScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-
-        applicationState = ApplicationState.loadState();
     }
 
     public void chooseName(ActionEvent actionEvent) {

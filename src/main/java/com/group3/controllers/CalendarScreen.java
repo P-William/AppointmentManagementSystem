@@ -1,33 +1,26 @@
-package com.group3;
+package com.group3.controllers;
 
-import com.group3.objects.ApplicationState;
+import com.group3.App;
 import com.group3.objects.Appointment;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 
 public class CalendarScreen extends BaseController {
@@ -38,10 +31,9 @@ public class CalendarScreen extends BaseController {
     @FXML public TextField searchField;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
+    @FXML private VBox page;
     private YearMonth displayYearMonth = YearMonth.now();
     private LocalDate searchResultDate = null;
-
-    ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -53,8 +45,6 @@ public class CalendarScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-
-        applicationState = ApplicationState.loadState();
 
         populateCalendar(displayYearMonth);
     }
@@ -96,13 +86,15 @@ public class CalendarScreen extends BaseController {
 
                 dayContent.getChildren().add(dayNum);
 
+                addAppointments(dayContent, calendarDate);
+
                 if (calendarDate.equals(searchResultDate)) {
                     Button appointment = new Button("Brooke Cronin\nDr. Smith\nin Room 1\n@ 13:00–13:30");
                     appointment.getStyleClass().add("calendar-appointment");
                     appointment.setMaxWidth(Double.MAX_VALUE);
                     appointment.setOnAction(e -> {
                         try {
-                            viewAppointment();
+                            viewAppointment(null);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -131,11 +123,21 @@ public class CalendarScreen extends BaseController {
 
         for (Appointment appointment : matchingAppointments) {
             Button button = new Button(appointment.getPatient().getName() + "\n" + appointment.getDoctor().getName() + "\n" + appointment.getRoomBooked().getRoomName() + "\n" + appointment.getAppointmentAt().toString());
+            button.getStyleClass().add("calendar-appointment");
+            button.setMaxWidth(Double.MAX_VALUE);
+            button.setOnAction(e -> {
+                try {
+                    viewAppointment(appointment);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            vBox.getChildren().add(button);
         }
     }
 
-    private void viewAppointment() throws IOException {
-        //switchScene("appointmentView");
+    private void viewAppointment(Appointment appointment) throws IOException {
+        App.loadAppointmentView(appointment);
     }
 
     @FXML

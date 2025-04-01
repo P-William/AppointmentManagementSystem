@@ -1,25 +1,22 @@
-package com.group3;
+package com.group3.controllers;
 
+import com.group3.App;
 import com.group3.objects.ApplicationState;
 import com.group3.objects.Appointment;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Setter;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class AppointmentViewScreen extends BaseController{
+public class AppointmentViewScreen extends BaseController {
     @FXML private ToggleButton createToggle;
     @FXML private VBox createDropdown;
     @FXML
@@ -46,7 +43,7 @@ public class AppointmentViewScreen extends BaseController{
     private Appointment appointment;
 
     @Setter
-    private ApplicationState applicationState;
+    private ApplicationState applicationState = ApplicationState.getInstance();
 
     @FXML
     public void initialize() {
@@ -54,7 +51,6 @@ public class AppointmentViewScreen extends BaseController{
             calendarDropdown.setVisible(newVal);
             calendarDropdown.setManaged(newVal);
         });
-        pageTitle.setText("Appointment > Brooke Cronin, Timmy Smith, Room 1 @ 13:00-13:30");
         createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
@@ -71,6 +67,7 @@ public class AppointmentViewScreen extends BaseController{
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
 
+        pageTitle.setText("Appointment > " + appointment.getPatient().getName() + ", " + appointment.getDoctor().getName() + ", " + appointment.getRoomBooked().getRoomName());
         checkIn.setText("Checkin");
         patient.setText(appointment.getPatient().getName());
         doctor.setText(appointment.getDoctor().getName());
@@ -84,15 +81,15 @@ public class AppointmentViewScreen extends BaseController{
     }
 
     public void viewPatient(ActionEvent actionEvent) throws IOException {
-        switchScene("patientsView");
+        App.loadPatientView(appointment.getPatient());
     }
 
     public void viewDoctor(ActionEvent actionEvent) throws IOException {
-        switchScene("doctorsView");
+        App.loadDoctorView(appointment.getDoctor());
     }
 
     public void viewRoom(ActionEvent actionEvent) throws IOException {
-        switchScene("roomsView");
+        App.loadRoomView(appointment.getRoomBooked());
     }
 
     public void changeDate(ActionEvent actionEvent) {

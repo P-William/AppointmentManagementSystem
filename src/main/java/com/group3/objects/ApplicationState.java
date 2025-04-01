@@ -15,6 +15,10 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApplicationState {
+
+    @Getter
+    private static final ApplicationState instance = loadState();
+
     private static final String ROOT_DIRECTORY = "./data/";
     private static final String ROOMS_FILE = ROOT_DIRECTORY + "rooms.json";
     private static final String DOCTORS_FILE = ROOT_DIRECTORY + "doctors.json";
@@ -85,7 +89,7 @@ public class ApplicationState {
         }
     }
 
-    public static ApplicationState loadState() throws JsonFileLoadException {
+    private static ApplicationState loadState() throws JsonFileLoadException {
         if (!allFilesExist()) {
             return new ApplicationState();
         }

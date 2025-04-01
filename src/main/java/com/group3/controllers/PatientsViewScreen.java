@@ -1,46 +1,46 @@
-package com.group3;
+package com.group3.controllers;
 
-import com.group3.objects.ApplicationState;
-import com.group3.objects.Doctor;
-import javafx.application.Application;
+import com.group3.objects.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import lombok.Setter;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-public class DoctorsViewScreen extends BaseController {
+//@RequiredArgsConstructor
+public class PatientsViewScreen extends BaseController {
     @FXML private ToggleButton createToggle;
     @FXML private VBox createDropdown;
     @FXML
     public Label email;
     @FXML
+    public Label name;
+    @FXML
     public Label phone;
     @FXML
     public Label address;
     @FXML
-    public Label specialities;
+    public Label allergies;
+    @FXML
+    public Label medicalConditions;
+    @FXML
+    public Label medication;
+    @FXML
+    public Label language;
     @FXML
     public Label pageTitle;
-    @FXML
-    public Label name;
     @FXML
     private ToggleButton calendarToggle;
     @FXML
     private VBox calendarDropdown;
 
-    private Doctor doctor;
-
-    @Setter
-    private ApplicationState applicationState;
+    private Patient patient;
 
     @FXML
     public void initialize() {
@@ -52,30 +52,38 @@ public class DoctorsViewScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-
-
     }
 
     public void delete() throws IOException {
-        applicationState.removeDoctor(doctor);
+        applicationState.removePatient(patient);
         applicationState.saveState();
         selectDashboard();
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+        pageTitle.setText("Patients > " + patient.getName());
+        name.setText(patient.getName());
+        email.setText(patient.getEmail());
+        phone.setText(patient.getPhoneNumber());
+        address.setText(patient.getAddress());
 
-        pageTitle.setText("Doctor > " + doctor.getName());
-        name.setText(doctor.getName());
-        email.setText(doctor.getEmail());
-        phone.setText(doctor.getPhoneNumber());
-        specialities.setText(String.join(", ", doctor.getSpecialties()));
+        List<String> allergyList = patient.getAllergies();
+        allergies.setText(String.join(", ", allergyList));
+
+        List<String> conditionsList = patient.getMedicalConditions();
+        medicalConditions.setText(String.join(", ", conditionsList));
+
+        List<String> medicationList = patient.getMedications();
+        medication.setText(String.join(", ", medicationList));
+
+        language.setText(patient.getPrimaryLanguage());
     }
 
     public void changeName(ActionEvent actionEvent) {
         String newName = showInputDialog("Enter a new name:", name.getText());
         if (newName != null) {
-            doctor.setName(newName);
+            patient.setName(newName);
             applicationState.saveState();
             name.setText(newName);
         }
@@ -84,7 +92,7 @@ public class DoctorsViewScreen extends BaseController {
     public void changeEmail(ActionEvent actionEvent) {
         String newEmail = showInputDialog("Enter new email:", email.getText());
         if (newEmail != null) {
-            doctor.setEmail(newEmail);
+            patient.setEmail(newEmail);
             applicationState.saveState();
             email.setText(newEmail);
         }
@@ -93,22 +101,59 @@ public class DoctorsViewScreen extends BaseController {
     public void changePhone(ActionEvent actionEvent) {
         String newPhone = showInputDialog("Enter new phone number:", phone.getText());
         if (newPhone != null) {
-            doctor.setPhoneNumber(newPhone);
+            patient.setPhoneNumber(newPhone);
             applicationState.saveState();
             phone.setText(newPhone);
         }
     }
 
-    public void changeSpeciality(ActionEvent actionEvent) {
-        List<String> currentSpeciality = Arrays.asList(specialities.getText().split(",\\s*"));
-        List<String> updatedSpeciality = showListChangeDialog("Edit specialities:", currentSpeciality);
-        if (updatedSpeciality != null) {
-            doctor.setSpecialties(updatedSpeciality);
+    public void changeAddress(ActionEvent actionEvent) {
+        String newAddress = showInputDialog("Enter new address:", address.getText());
+        if (newAddress != null) {
+            patient.setAddress(newAddress);
             applicationState.saveState();
-            specialities.setText(String.join(", ", updatedSpeciality));
+            address.setText(newAddress);
         }
     }
 
+    public void changeAllergies(ActionEvent actionEvent) {
+        List<String> currentAllergies = Arrays.asList(allergies.getText().split(",\\s*"));
+        List<String> updatedAllergies = showListChangeDialog("Edit allergies:", currentAllergies);
+        if (updatedAllergies != null) {
+            patient.setAllergies(updatedAllergies);
+            applicationState.saveState();
+            allergies.setText(String.join(", ", updatedAllergies));
+        }
+    }
+
+    public void changeMedicalConditions(ActionEvent actionEvent) {
+        List<String> currentConditions = Arrays.asList(medicalConditions.getText().split(",\\s*"));
+        List<String> updatedConditions = showListChangeDialog("Edit medical conditions:", currentConditions);
+        if (updatedConditions != null) {
+            patient.setMedicalConditions(updatedConditions);
+            applicationState.saveState();
+            medicalConditions.setText(String.join(", ", updatedConditions));
+        }
+    }
+
+    public void changeMedication(ActionEvent actionEvent) {
+        List<String> currentMedication = Arrays.asList(medication.getText().split(",\\s*"));
+        List<String> updatedMedication = showListChangeDialog("Edit medications:", currentMedication);
+        if (updatedMedication != null) {
+            patient.setMedications(updatedMedication);
+            applicationState.saveState();
+            medication.setText(String.join(", ", updatedMedication));
+        }
+    }
+
+    public void changeLanguage(ActionEvent actionEvent) {
+        String newLanguage = showInputDialog("Enter primary language:", language.getText());
+        if (newLanguage != null) {
+            patient.setPrimaryLanguage(newLanguage);
+            applicationState.saveState();
+            language.setText(newLanguage);
+        }
+    }
 
     private String showInputDialog(String message, String defaultValue) {
         TextInputDialog dialog = new TextInputDialog(defaultValue);

@@ -1,7 +1,6 @@
 package com.group3.objects;
 
-import com.group3.AppointmentViewScreen;
-import com.group3.DashboardScreen;
+import com.group3.controllers.DashboardScreen;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

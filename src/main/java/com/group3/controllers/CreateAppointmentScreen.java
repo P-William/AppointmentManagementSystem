@@ -1,26 +1,24 @@
-package com.group3;
+package com.group3.controllers;
 
 import com.group3.factories.AppointmentFactory;
-import com.group3.objects.*;
-import javafx.application.Application;
+import com.group3.objects.DisplayUtilities;
+import com.group3.objects.Doctor;
+import com.group3.objects.Patient;
+import com.group3.objects.Room;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class CreateAppointmentScreen extends BaseController {
     @FXML
@@ -54,10 +52,7 @@ public class CreateAppointmentScreen extends BaseController {
     private LocalDate selectedDate;
     private LocalTime selectedStartTime;
     private LocalTime selectedEndTime;
-    private Duration duration;
     private String selectedReason;
-
-    private ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -67,7 +62,6 @@ public class CreateAppointmentScreen extends BaseController {
         });
         pageTitle.setText("Create Appointment");
 
-        applicationState = ApplicationState.loadState();
         createToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
@@ -320,7 +314,7 @@ public class CreateAppointmentScreen extends BaseController {
             alert.show();
         }
         else {
-            duration = Duration.between(selectedStartTime, selectedEndTime);
+            Duration duration = Duration.between(selectedStartTime, selectedEndTime);
             LocalDateTime time = selectedDate.atTime(selectedStartTime);
 
             DisplayUtilities.displaySuccess();

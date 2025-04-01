@@ -1,24 +1,17 @@
-package com.group3;
+package com.group3.controllers;
 
-import com.group3.objects.ApplicationState;
+import com.group3.App;
 import com.group3.objects.Doctor;
 import com.group3.objects.DoctorObjectFactory;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import javax.print.Doc;
 import java.io.IOException;
-import java.util.Objects;
 
-public class DoctorsSearchScreen extends BaseController{
+public class DoctorsSearchScreen extends BaseController {
     @FXML private ToggleButton createToggle;
     @FXML private VBox createDropdown;
     @FXML
@@ -27,9 +20,6 @@ public class DoctorsSearchScreen extends BaseController{
     public VBox doctorList;
     @FXML private ToggleButton calendarToggle;
     @FXML private VBox calendarDropdown;
-
-    private DoctorObjectFactory doctorObjectFactory;
-    private ApplicationState applicationState;
 
     @FXML
     public void initialize() {
@@ -42,10 +32,7 @@ public class DoctorsSearchScreen extends BaseController{
             createDropdown.setManaged(newVal);
         });
 
-
-        applicationState = ApplicationState.loadState();
-
-        doctorObjectFactory = new DoctorObjectFactory(this);
+        DoctorObjectFactory doctorObjectFactory = new DoctorObjectFactory(this);
         doctorObjectFactory.populateDoctors(doctorList, applicationState.getDoctors());
     }
 
@@ -54,6 +41,6 @@ public class DoctorsSearchScreen extends BaseController{
     }
 
     public void viewDoctor(ActionEvent actionEvent, Doctor doctor) throws IOException {
-        App.loadDoctorView(doctor, applicationState);
+        App.loadDoctorView(doctor);
     }
 }

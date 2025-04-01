@@ -1,31 +1,16 @@
-package com.group3;
+package com.group3.controllers;
 
-import com.group3.objects.Doctor;
+import com.group3.App;
+import com.group3.objects.ApplicationState;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class BaseController {
 
+    protected final ApplicationState applicationState = ApplicationState.getInstance();
+
     protected void switchScene(String baseName) throws IOException {
-//        String fxmlPath = String.format("/com/group3/%sLayout.fxml", baseName);
-//        String cssPath = String.format("/com/group3/%sStyle.css", baseName);
-//
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-//        BorderPane root = loader.load();
-//
-//        Scene scene = new Scene(root, 1280, 720);
-//        Stage stage = (Stage) calendarDropdown.getScene().getWindow();
-//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssPath)).toExternalForm());
-//
-//        stage.setTitle("Doctor Tracker");
-//        stage.setScene(scene);
-//        stage.show();
         App.setRoot(baseName);
     }
 

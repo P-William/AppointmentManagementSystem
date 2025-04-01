@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.group3.CreatePatientScreen"
+            fx:controller="com.group3.controllers.CreatePatientScreen"
             stylesheets="@createPatientStyle.css" styleClass="main">
     <top>
         <TextFlow>

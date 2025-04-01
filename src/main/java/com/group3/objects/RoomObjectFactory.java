@@ -1,6 +1,6 @@
 package com.group3.objects;
 
-import com.group3.RoomsSearchScreen;
+import com.group3.controllers.RoomsSearchScreen;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

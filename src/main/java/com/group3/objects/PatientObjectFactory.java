@@ -1,11 +1,9 @@
 package com.group3.objects;
 
-import com.group3.PatientsSearchScreen;
+import com.group3.controllers.PatientsSearchScreen;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
 

@@ -1,6 +1,13 @@
 package com.group3;
 
-import com.group3.objects.*;
+import com.group3.controllers.AppointmentViewScreen;
+import com.group3.controllers.DoctorsViewScreen;
+import com.group3.controllers.PatientsViewScreen;
+import com.group3.controllers.RoomsViewScreen;
+import com.group3.objects.Appointment;
+import com.group3.objects.Doctor;
+import com.group3.objects.Patient;
+import com.group3.objects.Room;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +22,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboardLayout"), 1350, 1100);
+        scene = new Scene(loadFXML("dashboardLayout"), 1280, 780);
         scene.getStylesheets().add(App.class.getResource("dashboardStyle.css").toExternalForm());
         stage.setTitle("Doctor Tracker");
         stage.setScene(scene);
@@ -23,50 +30,46 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    static void loadPatientView(Patient patient, ApplicationState applicationState) throws IOException {
+    public static void loadPatientView(Patient patient) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/group3/patientsViewLayout.fxml"));
         BorderPane root = loader.load();
 
         PatientsViewScreen screen = loader.getController();
         screen.setPatient(patient);
-        screen.setApplicationState(applicationState);
 
         scene.setRoot(root);
     }
 
-    static void loadDoctorView(Doctor doctor, ApplicationState applicationState) throws IOException {
+    public static void loadDoctorView(Doctor doctor) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/group3/doctorsViewLayout.fxml"));
         BorderPane root = loader.load();
 
         DoctorsViewScreen screen = loader.getController();
         screen.setDoctor(doctor);
-        screen.setApplicationState(applicationState);
 
         scene.setRoot(root);
     }
 
-    static void loadRoomView(Room room, ApplicationState applicationState) throws IOException {
+    public static void loadRoomView(Room room) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/group3/roomsViewLayout.fxml"));
         BorderPane root = loader.load();
 
         RoomsViewScreen screen = loader.getController();
         screen.setRoom(room);
-        screen.setApplicationState(applicationState);
 
         scene.setRoot(root);
     }
 
-    static void loadAppointmentView(Appointment appointment, ApplicationState applicationState) throws IOException {
+    public static void loadAppointmentView(Appointment appointment) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/group3/appointmentViewLayout.fxml"));
         BorderPane root = loader.load();
 
         AppointmentViewScreen screen = loader.getController();
         screen.setAppointment(appointment);
-        screen.setApplicationState(applicationState);
 
         scene.setRoot(root);
     }

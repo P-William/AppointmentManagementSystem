@@ -1,21 +1,15 @@
-package com.group3;
+package com.group3.controllers;
 
-import com.group3.objects.ApplicationState;
 import com.group3.objects.Room;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import lombok.Setter;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Optional;
 
 public class RoomsViewScreen extends BaseController {
     @FXML private ToggleButton createToggle;
@@ -31,9 +25,6 @@ public class RoomsViewScreen extends BaseController {
 
     private Room room;
 
-    @Setter
-    private ApplicationState applicationState;
-
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -44,8 +35,6 @@ public class RoomsViewScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-
-
     }
 
     public void delete() throws IOException {
@@ -53,7 +42,6 @@ public class RoomsViewScreen extends BaseController {
         applicationState.saveState();
         selectDashboard();
     }
-
 
     public void setRoom(Room room){
         this.room = room;
@@ -63,7 +51,7 @@ public class RoomsViewScreen extends BaseController {
     }
 
     public void changeName(ActionEvent actionEvent) {
-        String newName = showInputDialog("Enter new name:", name.getText());
+        String newName = showInputDialog(name.getText());
         if (newName != null) {
             room.setRoomName(newName);
             applicationState.saveState();
@@ -71,11 +59,11 @@ public class RoomsViewScreen extends BaseController {
         }
     }
 
-    private String showInputDialog(String message, String defaultValue) {
+    private String showInputDialog(String defaultValue) {
         TextInputDialog dialog = new TextInputDialog(defaultValue);
         dialog.setTitle("Edit Room Info");
         dialog.setHeaderText(null);
-        dialog.setContentText(message);
+        dialog.setContentText("Enter new name:");
 
         Optional<String> result = dialog.showAndWait();
         return result.orElse(null);

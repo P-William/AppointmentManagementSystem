@@ -1,10 +1,10 @@
 package com.group3.objects;
 
-import com.group3.DoctorsSearchScreen;
+import com.group3.controllers.DoctorsSearchScreen;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
@@ -40,8 +40,8 @@ public class DoctorObjectFactory {
         });
 
         HBox hBox = new HBox();
-        hBox.getChildren().addAll(name, phone, specialties, view);
         hBox.getStyleClass().add("table-entry");
+        hBox.getChildren().addAll(name, phone, specialties, view);
 
         return hBox;
     }

@@ -1,21 +1,16 @@
-package com.group3;
+package com.group3.controllers;
 
 import com.group3.factories.RoomFactory;
-import com.group3.objects.ApplicationState;
 import com.group3.objects.DisplayUtilities;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Optional;
 
 public class CreateRoomScreen extends BaseController {
     @FXML
@@ -33,8 +28,6 @@ public class CreateRoomScreen extends BaseController {
 
     private String selectedName;
 
-    private ApplicationState applicationState;
-
     @FXML
     public void initialize() {
         calendarToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -46,8 +39,6 @@ public class CreateRoomScreen extends BaseController {
             createDropdown.setVisible(newVal);
             createDropdown.setManaged(newVal);
         });
-
-        applicationState = ApplicationState.loadState();
     }
 
     public void chooseRoomName(ActionEvent actionEvent) {
